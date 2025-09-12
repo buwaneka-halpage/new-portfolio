@@ -143,7 +143,7 @@ export default function HeroSection() {
             className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 justify-center opacity-0" // Start with opacity 0
           >
             <Link 
-              href="/resume.pdf"
+              href="/newresume.pdf"
               className="btn-primary"
               target="_blank"
             >
