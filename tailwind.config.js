@@ -3,50 +3,42 @@ module.exports = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
-    './src/app/**/*.{js,ts,jsx,tsx}',
   ],
-  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: '#0070f3',
-          dark: '#0060df',
-          light: '#3694ff',
+        bg: '#0a0a0a',
+        surface: {
+          DEFAULT: '#111111',
+          light: '#1a1a1a',
+          lighter: '#222222',
         },
-        secondary: {
-          DEFAULT: '#6c757d',
-          dark: '#5a6268',
-          light: '#8f979e',
+        accent: {
+          DEFAULT: '#a8ff3e',
+          dim: 'rgba(168, 255, 62, 0.15)',
         },
-        dark: {
-          DEFAULT: '#1a202c',
-          lighter: '#2d3748',
-        },
-        light: {
-          DEFAULT: '#f8f9fa',
-          darker: '#e9ecef',
+        text: {
+          DEFAULT: '#f0ede8',
+          muted: '#888888',
+          subtle: '#555555',
         },
       },
       fontFamily: {
+        display: ['Syne', 'sans-serif'],
         sans: ['Inter', 'sans-serif'],
         mono: ['Fira Code', 'monospace'],
       },
-      animation: {
-        'fade-in': 'fadeIn 0.5s ease-in-out',
-        'slide-up': 'slideUp 0.5s ease-in-out',
-      },
-      keyframes: {
-        fadeIn: {
-          '0%': { opacity: 0 },
-          '100%': { opacity: 1 },
-        },
-        slideUp: {
-          '0%': { transform: 'translateY(20px)', opacity: 0 },
-          '100%': { transform: 'translateY(0)', opacity: 1 },
+      container: {
+        center: true,
+        padding: '1.5rem',
+        screens: {
+          sm: '100%',
+          md: '100%',
+          lg: '1400px',
+          xl: '1400px',
         },
       },
     },
   },
   plugins: [],
-} 
+}

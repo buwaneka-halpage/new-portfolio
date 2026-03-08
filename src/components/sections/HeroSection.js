@@ -1,166 +1,212 @@
 import { useEffect, useRef } from 'react'
-import Link from 'next/link'
 import { gsap } from 'gsap'
-import { FiDownload, FiMail } from 'react-icons/fi'
+
+function SplitChars({ text, className = '' }) {
+  return (
+    <span className={`inline-block overflow-hidden ${className}`}>
+      {text.split('').map((char, i) => (
+        <span
+          key={i}
+          className="char inline-block"
+          style={{ transform: 'translateY(110%)' }}
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </span>
+      ))}
+    </span>
+  )
+}
 
 export default function HeroSection() {
   const sectionRef = useRef(null)
-  const headingRef = useRef(null)
-  const textRef = useRef(null)
-  const buttonsRef = useRef(null)
-  const particlesRef = useRef(null)
-  
+  const statsRef = useRef(null)
+  const scrollIndicatorRef = useRef(null)
+
   useEffect(() => {
-    if (!sectionRef.current) return;
-    
-    // Create a dedicated container for particles that won't affect content visibility
-    const particlesContainer = document.createElement('div')
-    particlesContainer.className = 'absolute inset-0 overflow-hidden pointer-events-none z-0'
-    sectionRef.current.appendChild(particlesContainer)
-    
-    const numParticles = 25 // Slightly more particles
-    const particles = []
-    
-    for (let i = 0; i < numParticles; i++) {
-      const particle = document.createElement('div')
-      // Make particles darker (opacity 0.2 instead of 0.1)
-      particle.className = 'absolute rounded-full bg-primary opacity-20'
-      
-      const size = Math.random() * 25 + 5 // Slightly larger particles
-      particle.style.width = `${size}px`
-      particle.style.height = `${size}px`
-      
-      // Position particles across the entire section
-      const leftPosition = Math.random() * 100
-      const topPosition = Math.random() * 100
-      
-      particle.style.left = `${leftPosition}%`
-      particle.style.top = `${topPosition}%`
-      particle.style.zIndex = '0' // Ensure particles are below content
-      
-      particlesContainer.appendChild(particle)
-      particles.push(particle)
-      
-      // More dynamic and faster animations
-      gsap.to(particle, {
-        x: Math.random() * 150 - 75, // Same movement range
-        y: Math.random() * 150 - 75, // Same movement range
-        duration: Math.random() * 3 + 2, // Much shorter duration for faster movement (was 8+6)
+    if (!sectionRef.current) return
+
+    const tl = gsap.timeline({ delay: 0.3 })
+
+    // Top label fade in
+    tl.fromTo(
+      '.hero-label',
+      { autoAlpha: 0, y: 20 },
+      { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out' }
+    )
+
+    // Character-by-character reveal for BUWANEKA
+    tl.to(
+      '.line-1 .char',
+      {
+        y: '0%',
+        stagger: 0.04,
+        duration: 1,
+        ease: 'power4.out',
+      },
+      '-=0.2'
+    )
+
+    // Character-by-character reveal for HALPAGE
+    tl.to(
+      '.line-2 .char',
+      {
+        y: '0%',
+        stagger: 0.04,
+        duration: 1,
+        ease: 'power4.out',
+      },
+      '-=0.7'
+    )
+
+    // Subtitle
+    tl.fromTo(
+      '.hero-subtitle',
+      { autoAlpha: 0, y: 20 },
+      { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power3.out' },
+      '-=0.4'
+    )
+
+    // Stats counter animation
+    if (statsRef.current) {
+      const statNumbers = statsRef.current.querySelectorAll('.stat-number')
+      tl.fromTo(
+        statsRef.current.querySelectorAll('.stat-item'),
+        { autoAlpha: 0, y: 30 },
+        { autoAlpha: 1, y: 0, stagger: 0.1, duration: 0.6, ease: 'power3.out' },
+        '-=0.3'
+      )
+
+      statNumbers.forEach((el) => {
+        const target = parseInt(el.getAttribute('data-value'), 10)
+        if (!isNaN(target)) {
+          gsap.fromTo(
+            el,
+            { textContent: 0 },
+            {
+              textContent: target,
+              duration: 1.5,
+              ease: 'power2.out',
+              snap: { textContent: 1 },
+              delay: 1.2,
+            }
+          )
+        }
+      })
+    }
+
+    // Marquee fade in
+    tl.fromTo(
+      '.hero-marquee',
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.8 },
+      '-=0.5'
+    )
+
+    // Scroll indicator bob animation
+    if (scrollIndicatorRef.current) {
+      tl.fromTo(
+        scrollIndicatorRef.current,
+        { autoAlpha: 0 },
+        { autoAlpha: 1, duration: 0.5 },
+        '-=0.3'
+      )
+
+      gsap.to(scrollIndicatorRef.current, {
+        y: 10,
+        duration: 1.2,
         repeat: -1,
         yoyo: true,
         ease: 'sine.inOut',
+        delay: 2,
       })
     }
-    
-    // Create additional fast-moving smaller particles for variety
-    for (let i = 0; i < 10; i++) {
-      const fastParticle = document.createElement('div')
-      fastParticle.className = 'absolute rounded-full bg-primary opacity-15'
-      
-      const size = Math.random() * 10 + 3 // Smaller particles
-      fastParticle.style.width = `${size}px`
-      fastParticle.style.height = `${size}px`
-      
-      const leftPosition = Math.random() * 100
-      const topPosition = Math.random() * 100
-      
-      fastParticle.style.left = `${leftPosition}%`
-      fastParticle.style.top = `${topPosition}%`
-      
-      particlesContainer.appendChild(fastParticle)
-      particles.push(fastParticle)
-      
-      // Very fast animations for these particles
-      gsap.to(fastParticle, {
-        x: Math.random() * 100 - 50,
-        y: Math.random() * 100 - 50,
-        duration: Math.random() * 1.5 + 1, // Very fast movement
-        repeat: -1,
-        yoyo: true,
-        ease: 'power1.inOut', // Different easing for variety
-      })
-    }
-    
-    // Fixed animations for content - Using from animations with autoAlpha for better visibility handling
-    gsap.fromTo(headingRef.current, 
-      { y: 50, autoAlpha: 0 },
-      { y: 0, autoAlpha: 1, duration: 0.8, ease: 'power3.out' }
-    )
-    
-    gsap.fromTo(textRef.current, 
-      { y: 50, autoAlpha: 0 },
-      { y: 0, autoAlpha: 1, duration: 0.8, delay: 0.3, ease: 'power3.out' }
-    )
-    
-    gsap.fromTo(buttonsRef.current, 
-      { y: 50, autoAlpha: 0 },
-      { y: 0, autoAlpha: 1, duration: 0.8, delay: 0.6, ease: 'power3.out' }
-    )
-    
+
     return () => {
-      if (particles.length) {
-        particles.forEach(particle => {
-          gsap.killTweensOf(particle)
-        })
-      }
-      
-      particlesContainer?.remove();
+      tl.kill()
     }
   }, [])
-  
+
+  const marqueeText = 'AVAILABLE FOR WORK \u00B7 CS & ENGINEERING \u00B7 UNIVERSITY OF MORATUWA \u00B7 '
+
   return (
-    <section 
+    <section
       id="hero"
       ref={sectionRef}
-      className="relative flex items-center min-h-screen pt-20 overflow-hidden"
+      className="relative flex flex-col justify-center min-h-screen pt-20 pb-10 overflow-hidden"
     >
-      {/* Static background gradient for additional visual appeal */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent to-primary/5 z-0"></div>
-      
-      <div className="container relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
-          <h1 
-            ref={headingRef}
-            className="mb-6 opacity-0" // Start with opacity 0 to avoid flash
+      <div className="container">
+        {/* Top label */}
+        <p className="hero-label font-mono text-xs tracking-widest uppercase text-text-muted mb-12 opacity-0">
+          Portfolio &middot; 2025
+        </p>
+
+        {/* Name — massive display type */}
+        <div className="mb-6">
+          <h1 className="font-display font-extrabold leading-[0.9] tracking-tight"
+            style={{ fontSize: 'clamp(3.5rem, 11vw, 10rem)' }}
           >
-            Buwaneka Halpage
-            <span className="block text-2xl md:text-3xl font-normal mt-2 text-primary">
-              Aspiring Software Engineer
+            <span className="block overflow-hidden">
+              <SplitChars text="BUWANEKA" className="line-1" />
+            </span>
+            <span className="block overflow-hidden pl-[5vw] md:pl-[10vw]">
+              <SplitChars text="HALPAGE" className="line-2" />
             </span>
           </h1>
-          
-          <p 
-            ref={textRef}
-            className="mb-8 text-lg md:text-xl text-gray-700 dark:text-gray-300 opacity-0" // Start with opacity 0
-          >
-            A Computer Science and Engineering undergraduate at the University of Moratuwa,
-            driven by curiosity and passionate about technology. Ready to bring innovative
-            solutions to the digital world.
-          </p>
-          
-          <div 
-            ref={buttonsRef}
-            className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 justify-center opacity-0" // Start with opacity 0
-          >
-            <Link 
-              href="/newresume.pdf"
-              className="btn-primary"
-              target="_blank"
-            >
-              <FiDownload className="mr-2" />
-              Download CV
-            </Link>
-            
-            <Link 
-              href="#contact"
-              className="btn-outline"
-            >
-              <FiMail className="mr-2" />
-              Contact Me
-            </Link>
+        </div>
+
+        {/* Subtitle */}
+        <p className="hero-subtitle font-mono text-sm md:text-base text-text-muted tracking-wider uppercase mb-16 opacity-0">
+          Aspiring Software Engineer
+        </p>
+
+        {/* Stats Row */}
+        <div ref={statsRef} className="flex gap-12 md:gap-20 mb-20">
+          <div className="stat-item opacity-0">
+            <span className="stat-number block font-display text-4xl md:text-5xl font-bold text-text" data-value="3">
+              0
+            </span>
+            <span className="block font-mono text-xs text-text-muted uppercase tracking-wider mt-1">
+              Projects
+            </span>
+          </div>
+          <div className="stat-item opacity-0">
+            <span className="stat-number block font-display text-4xl md:text-5xl font-bold text-text" data-value="3">
+              0
+            </span>
+            <span className="block font-mono text-xs text-text-muted uppercase tracking-wider mt-1">
+              Roles
+            </span>
+          </div>
+          <div className="stat-item opacity-0">
+            <span className="block font-display text-4xl md:text-5xl font-bold text-accent">
+              UOM
+            </span>
+            <span className="block font-mono text-xs text-text-muted uppercase tracking-wider mt-1">
+              University
+            </span>
           </div>
         </div>
       </div>
+
+      {/* Marquee strip */}
+      <div className="hero-marquee w-full border-t border-b border-surface-lighter py-4 opacity-0">
+        <div className="marquee-track whitespace-nowrap">
+          <span className="inline-block font-mono text-sm text-text-muted tracking-widest uppercase">
+            {marqueeText.repeat(6)}
+          </span>
+        </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div
+        ref={scrollIndicatorRef}
+        className="absolute bottom-8 right-8 flex flex-col items-center gap-2 opacity-0"
+      >
+        <span className="font-mono text-[10px] tracking-widest uppercase text-text-subtle rotate-90 origin-center mb-4">
+          Scroll
+        </span>
+        <span className="block w-px h-8 bg-text-subtle" />
+      </div>
     </section>
   )
-} 
+}

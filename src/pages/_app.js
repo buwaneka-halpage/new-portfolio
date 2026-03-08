@@ -2,30 +2,43 @@ import '@/styles/globals.css'
 import { useEffect } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-import { ThemeProvider } from '@/context/ThemeContext'
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
-    // Make sure ScrollTrigger is registered
-    if (typeof window !== 'undefined') {
-      // Register plugins
-      gsap.registerPlugin(ScrollTrigger);
-      
-      // Default GSAP settings
-      gsap.config({
-        nullTargetWarn: false,
-      });
-      
-      // Force GSAP to refresh on page load to handle any scroll position issues
-      ScrollTrigger.refresh();
-    }
-  }, []);
+    if (typeof window === 'undefined') return
 
-  return (
-    <ThemeProvider>
-      <Component {...pageProps} />
-    </ThemeProvider>
-  )
+    gsap.registerPlugin(ScrollTrigger)
+    gsap.config({ nullTargetWarn: false })
+
+    // Initialize Lenis smooth scroll
+    let lenis
+    const initLenis = async () => {
+      const Lenis = (await import('@studio-freight/lenis')).default
+      lenis = new Lenis({
+        lerp: 0.1,
+        smoothWheel: true,
+      })
+
+      // Connect Lenis to GSAP ScrollTrigger
+      lenis.on('scroll', ScrollTrigger.update)
+      gsap.ticker.add((time) => lenis.raf(time * 1000))
+      gsap.ticker.lagSmoothing(0)
+    }
+
+    initLenis()
+
+    // Force refresh after mount
+    const refreshTimeout = setTimeout(() => {
+      ScrollTrigger.refresh(true)
+    }, 500)
+
+    return () => {
+      clearTimeout(refreshTimeout)
+      if (lenis) lenis.destroy()
+    }
+  }, [])
+
+  return <Component {...pageProps} />
 }
 
-export default MyApp 
+export default MyApp

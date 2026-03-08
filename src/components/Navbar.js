@@ -1,107 +1,126 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { FiMenu, FiX, FiSun, FiMoon } from 'react-icons/fi'
-import { useTheme } from '@/context/ThemeContext'
+import { gsap } from 'gsap'
+
+const navLinks = [
+  { number: '01', name: 'About', href: '#about' },
+  { number: '02', name: 'Skills', href: '#skills' },
+  { number: '03', name: 'Projects', href: '#projects' },
+  { number: '04', name: 'Experience', href: '#experience' },
+  { number: '05', name: 'Contact', href: '#contact' },
+]
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const { isDarkMode, toggleTheme } = useTheme()
-  
+  const overlayRef = useRef(null)
+  const linksRef = useRef([])
+
+  // Animate mobile menu open
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true)
-      } else {
-        setScrolled(false)
+    if (!isOpen || !overlayRef.current) return
+
+    document.body.style.overflow = 'hidden'
+
+    gsap.fromTo(
+      overlayRef.current,
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.3, ease: 'power2.out' }
+    )
+
+    gsap.fromTo(
+      linksRef.current.filter(Boolean),
+      { y: 60, autoAlpha: 0 },
+      {
+        y: 0,
+        autoAlpha: 1,
+        stagger: 0.08,
+        duration: 0.6,
+        ease: 'power4.out',
+        delay: 0.15,
       }
+    )
+
+    return () => {
+      document.body.style.overflow = ''
     }
-    
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-  
-  const navLinks = [
-    { name: 'Home', href: '#hero' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Education', href: '#education' },
-    { name: 'Contact', href: '#contact' },
-  ]
-  
+  }, [isOpen])
+
+  const closeMenu = () => setIsOpen(false)
+
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      scrolled ? 'bg-white/90 dark:bg-dark/90 backdrop-blur-md shadow-md' : ''
-    }`}>
-      <nav className="container flex items-center justify-between h-16 md:h-20">
-        <Link 
-          href="/"
-          className="text-xl font-bold text-primary"
+    <header className="fixed top-0 w-full z-50 mix-blend-difference">
+      <nav className="container flex items-center justify-between h-20">
+        {/* Logo */}
+        <Link
+          href="#hero"
+          className="font-display text-xl font-bold text-white tracking-tight"
         >
-          Buwaneka Halpage
+          BH
         </Link>
-        
+
         {/* Desktop Navigation */}
-        <div className="hidden md:flex md:items-center">
-          <ul className="flex items-center space-x-8 mr-4">
-            {navLinks.map((link) => (
-              <li key={link.name}>
-                <Link 
-                  href={link.href}
-                  className="font-medium hover:text-primary transition-colors"
-                >
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          
-          {/* Theme Toggle Button - Desktop */}
-          <button
-            onClick={toggleTheme}
-            className="p-2 ml-4 rounded-full bg-light-darker dark:bg-dark-lighter transition-colors hover:text-primary"
-            aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            {isDarkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
-          </button>
-        </div>
-        
-        {/* Mobile Menu and Theme Toggle */}
-        <div className="flex items-center md:hidden">
-          {/* Theme Toggle Button - Mobile */}
-          <button
-            onClick={toggleTheme}
-            className="p-2 mr-2 rounded-full bg-light-darker dark:bg-dark-lighter transition-colors hover:text-primary"
-            aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            {isDarkMode ? <FiSun size={20} /> : <FiMoon size={20} />}
-          </button>
-          
-          {/* Mobile Menu Button */}
-          <button 
-            className="p-2"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
-          </button>
-        </div>
+        <ul className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <li key={link.name}>
+              <Link
+                href={link.href}
+                className="group relative font-mono text-xs uppercase tracking-wider text-white py-2"
+              >
+                <span className="text-text-subtle mr-1">({link.number})</span>
+                {link.name}
+                <span className="absolute bottom-0 left-0 w-full h-px bg-white origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Mobile hamburger */}
+        <button
+          className="md:hidden relative z-[60] w-8 h-8 flex flex-col justify-center items-center gap-1.5"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
+        >
+          <span
+            className={`block w-6 h-px bg-white transition-all duration-300 ${
+              isOpen ? 'rotate-45 translate-y-[3.5px]' : ''
+            }`}
+          />
+          <span
+            className={`block w-6 h-px bg-white transition-all duration-300 ${
+              isOpen ? '-rotate-45 -translate-y-[3.5px]' : ''
+            }`}
+          />
+        </button>
       </nav>
-      
-      {/* Mobile Navigation */}
+
+      {/* Mobile full-screen overlay */}
       {isOpen && (
-        <div className="fixed inset-0 z-40 bg-white dark:bg-dark pt-16">
-          <nav className="container py-5">
-            <ul className="flex flex-col space-y-4">
-              {navLinks.map((link) => (
+        <div
+          ref={overlayRef}
+          className="fixed inset-0 z-50 bg-[#0a0a0a] flex items-center justify-center opacity-0"
+        >
+          <button
+            className="absolute top-6 right-6 w-8 h-8 flex flex-col justify-center items-center"
+            onClick={closeMenu}
+            aria-label="Close menu"
+          >
+            <span className="block w-6 h-px bg-white rotate-45 translate-y-[0.5px]" />
+            <span className="block w-6 h-px bg-white -rotate-45 -translate-y-[0.5px]" />
+          </button>
+
+          <nav className="text-center">
+            <ul className="flex flex-col gap-6">
+              {navLinks.map((link, i) => (
                 <li key={link.name}>
-                  <Link 
+                  <Link
+                    ref={(el) => (linksRef.current[i] = el)}
                     href={link.href}
-                    className="block py-2 text-lg font-medium hover:text-primary transition-colors"
-                    onClick={() => setIsOpen(false)}
+                    onClick={closeMenu}
+                    className="block font-display text-4xl sm:text-5xl font-bold text-white hover:text-accent transition-colors duration-200 opacity-0"
                   >
+                    <span className="font-mono text-sm text-text-subtle mr-3">
+                      {link.number}
+                    </span>
                     {link.name}
                   </Link>
                 </li>
@@ -112,4 +131,4 @@ export default function Navbar() {
       )}
     </header>
   )
-} 
+}

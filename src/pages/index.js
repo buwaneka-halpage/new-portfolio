@@ -3,6 +3,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import Layout from '@/components/Layout'
 import HeroSection from '@/components/sections/HeroSection'
+import ChapterBridge from '@/components/ChapterBridge'
 import AboutSection from '@/components/sections/AboutSection'
 import SkillsSection from '@/components/sections/SkillsSection'
 import ProjectsSection from '@/components/sections/ProjectsSection'
@@ -12,26 +13,30 @@ import ContactSection from '@/components/sections/ContactSection'
 
 export default function Home() {
   useEffect(() => {
-    // Make sure ScrollTrigger is registered in this component too
-    gsap.registerPlugin(ScrollTrigger);
-    
-    // Force a refresh of ScrollTrigger when all components have mounted
+    gsap.registerPlugin(ScrollTrigger)
+
     const refreshTimeout = setTimeout(() => {
-      ScrollTrigger.refresh(true); // true = forces a refresh even if no change is detected
-    }, 500); // small delay to ensure all components have fully rendered
-    
-    return () => clearTimeout(refreshTimeout);
-  }, []);
-  
+      ScrollTrigger.refresh(true)
+    }, 500)
+
+    return () => clearTimeout(refreshTimeout)
+  }, [])
+
   return (
     <Layout>
       <HeroSection />
+      <ChapterBridge number="01" label="THE ORIGIN" />
       <AboutSection />
+      <ChapterBridge number="02" label="THE TOOLKIT" />
       <SkillsSection />
+      <ChapterBridge number="03" label="THE WORK" />
       <ProjectsSection />
+      <ChapterBridge number="04" label="THE JOURNEY" />
       <ExperienceSection />
+      <ChapterBridge number="05" label="THE FOUNDATION" />
       <EducationSection />
+      {/* No bridge before contact — it's the climax */}
       <ContactSection />
     </Layout>
   )
-} 
+}
