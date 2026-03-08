@@ -108,7 +108,7 @@ export default function AboutSection() {
           style={{ height: 'clamp(300px, 50vh, 600px)' }}
         >
           <Image
-            src="/Buwaneka.jpg"
+            src="/Buwaneka.jpeg"
             alt="Buwaneka Halpage"
             fill
             style={{ objectFit: 'cover' }}
