@@ -87,22 +87,25 @@ export default function AboutSection() {
         <div className="w-full h-px bg-surface-lighter mb-16" />
 
         {/* Statement text — large display */}
-        <h2
-          className="font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-16 max-w-4xl"
-          style={{ color: '#f0ede8' }}
-        >
-          {statement.split(' ').map((word, i) => (
-            <span key={i} className="statement-word inline-block mr-[0.3em] opacity-0">
-              {word}
-            </span>
-          ))}
-        </h2>
+        <div className="glass-panel p-8 md:p-12 rounded-3xl w-full mb-16 relative overflow-hidden group">
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-accent-purple)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+          <h2
+            className="font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-tight max-w-4xl relative z-10"
+            style={{ color: 'var(--color-text-main)' }}
+          >
+            {statement.split(' ').map((word, i) => (
+              <span key={i} className="statement-word inline-block mr-[0.3em] opacity-0" style={{ textShadow: '0 4px 24px rgba(0,0,0,0.5)' }}>
+                {word}
+              </span>
+            ))}
+          </h2>
+        </div>
 
         {/* Full-width image with clip-path reveal */}
         <div
           ref={imageRef}
-          className="relative w-full overflow-hidden rounded-lg mb-16"
-          style={{ height: 'clamp(300px, 50vh, 600px)' }}
+          className="relative w-full overflow-hidden rounded-3xl mb-16 border border-white/10 shadow-2xl"
+          style={{ height: 'clamp(300px, 50vh, 600px)', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }}
         >
           <Image
             src="/Buwaneka.jpg"
@@ -111,19 +114,20 @@ export default function AboutSection() {
             style={{ objectFit: 'cover' }}
             priority
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-deep)]/80 via-transparent to-transparent mix-blend-multiply" />
         </div>
 
         {/* Two-column biography */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
-          <div className="bio-col opacity-0">
-            <p className="text-text-muted leading-relaxed">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+          <div className="bio-col opacity-0 glass-panel p-8 rounded-2xl">
+            <p className="leading-relaxed text-lg" style={{ color: 'var(--color-text-muted)' }}>
               My journey began with simple coding challenges and evolved into a passion
               for building efficient, user-friendly applications. I focus on creating
               full-stack solutions that combine clean architecture with engaging interfaces.
             </p>
           </div>
-          <div className="bio-col opacity-0">
-            <p className="text-text-muted leading-relaxed">
+          <div className="bio-col opacity-0 glass-panel p-8 rounded-2xl">
+            <p className="leading-relaxed text-lg" style={{ color: 'var(--color-text-muted)' }}>
               Outside academics, I actively work with AIESEC and IEEE, developing
               strong leadership and communication skills. These experiences have shaped
               my approach to collaborative project work and problem-solving.
@@ -133,9 +137,9 @@ export default function AboutSection() {
       </div>
 
       {/* Skills marquee */}
-      <div className="w-full border-t border-b border-surface-lighter py-4 overflow-hidden">
+      <div className="w-full py-6 overflow-hidden glass-panel border-x-0">
         <div className="marquee-track whitespace-nowrap">
-          <span className="inline-block font-display text-lg md:text-xl font-bold text-text-subtle tracking-wider uppercase">
+          <span className="inline-block font-display text-lg md:text-xl font-bold tracking-wider uppercase" style={{ color: 'var(--color-accent-teal)' }}>
             {marqueeSkills.repeat(4)}
           </span>
         </div>

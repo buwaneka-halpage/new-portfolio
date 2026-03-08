@@ -53,10 +53,10 @@ export default function SkillsSection() {
         <p className="section-label">(02) Skills</p>
         <div className="w-full h-px bg-surface-lighter mb-16" />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 glass-panel p-8 md:p-12 rounded-3xl">
           {skillCategories.map((category, colIndex) => (
             <div key={category.title} className={`skill-col-${colIndex}`}>
-              <h3 className="font-mono text-xs uppercase tracking-widest text-text-muted mb-8">
+              <h3 className="font-mono text-xs uppercase tracking-widest mb-8" style={{ color: 'var(--color-accent-teal)' }}>
                 {category.title}
               </h3>
               <ul className="space-y-4">
@@ -66,8 +66,10 @@ export default function SkillsSection() {
                     className="skill-item group opacity-0"
                   >
                     <span
-                      className="block font-display font-bold text-text transition-all duration-200 group-hover:translate-x-2 group-hover:text-accent"
-                      style={{ fontSize: 'clamp(1.25rem, 2.5vw, 2rem)' }}
+                      className="block font-display font-bold transition-all duration-300 group-hover:translate-x-2"
+                      style={{ fontSize: 'clamp(1.25rem, 2.5vw, 2rem)', color: 'var(--color-text-main)' }}
+                      onMouseEnter={(e) => { e.target.style.color = 'var(--color-accent-magenta)' }}
+                      onMouseLeave={(e) => { e.target.style.color = 'var(--color-text-main)' }}
                     >
                       {skill}
                     </span>

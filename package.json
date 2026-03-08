@@ -9,12 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-three/drei": "^9.96.1",
+    "@react-three/fiber": "^8.15.12",
+    "@react-three/postprocessing": "^2.16.0",
     "@studio-freight/lenis": "^1.0.42",
+    "@types/three": "^0.160.0",
     "gsap": "^3.12.4",
     "next": "^14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.12.0"
+    "react-icons": "^4.12.0",
+    "three": "^0.160.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",

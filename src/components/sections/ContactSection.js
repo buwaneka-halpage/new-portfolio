@@ -163,11 +163,11 @@ export default function ContactSection() {
         </div>
 
         {/* Form + Info grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+        <div className="glass-panel rounded-3xl p-8 lg:p-12 shadow-2xl grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 relative overflow-hidden">
           {/* Form */}
-          <form ref={formRef} onSubmit={handleSubmit} className="space-y-8">
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-8 relative z-10">
             <div className="form-field opacity-0">
-              <label className="block font-mono text-xs uppercase tracking-widest text-text-muted mb-3">
+              <label className="block font-mono text-xs uppercase tracking-widest mb-3" style={{ color: 'var(--color-accent-purple)' }}>
                 Name
               </label>
               <input
@@ -176,12 +176,13 @@ export default function ContactSection() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full bg-transparent border-b border-surface-lighter py-3 text-text text-lg focus:outline-none focus:border-accent transition-colors duration-200"
+                className="w-full bg-transparent border-b border-white/20 py-3 text-lg focus:outline-none focus:border-[var(--color-accent-teal)] transition-colors duration-300"
+                style={{ color: 'var(--color-text-main)' }}
               />
             </div>
 
             <div className="form-field opacity-0">
-              <label className="block font-mono text-xs uppercase tracking-widest text-text-muted mb-3">
+              <label className="block font-mono text-xs uppercase tracking-widest mb-3" style={{ color: 'var(--color-accent-purple)' }}>
                 Email
               </label>
               <input
@@ -190,12 +191,13 @@ export default function ContactSection() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full bg-transparent border-b border-surface-lighter py-3 text-text text-lg focus:outline-none focus:border-accent transition-colors duration-200"
+                className="w-full bg-transparent border-b border-white/20 py-3 text-lg focus:outline-none focus:border-[var(--color-accent-teal)] transition-colors duration-300"
+                style={{ color: 'var(--color-text-main)' }}
               />
             </div>
 
             <div className="form-field opacity-0">
-              <label className="block font-mono text-xs uppercase tracking-widest text-text-muted mb-3">
+              <label className="block font-mono text-xs uppercase tracking-widest mb-3" style={{ color: 'var(--color-accent-purple)' }}>
                 Message
               </label>
               <textarea
@@ -204,16 +206,22 @@ export default function ContactSection() {
                 onChange={handleChange}
                 required
                 rows={4}
-                className="w-full bg-transparent border-b border-surface-lighter py-3 text-text text-lg focus:outline-none focus:border-accent transition-colors duration-200 resize-none"
+                className="w-full bg-transparent border-b border-white/20 py-3 text-lg focus:outline-none focus:border-[var(--color-accent-teal)] transition-colors duration-300 resize-none"
+                style={{ color: 'var(--color-text-main)' }}
               />
             </div>
 
-            <div className="form-field opacity-0">
+            <div className="form-field opacity-0 pt-4">
               <button
                 ref={submitRef}
                 type="submit"
                 disabled={formStatus.isSubmitting}
-                className="inline-flex items-center gap-3 bg-accent text-bg font-display font-bold text-lg px-10 py-4 hover:bg-opacity-90 transition-all duration-200"
+                className="inline-flex items-center gap-3 font-display font-bold text-lg px-10 py-4 rounded-full transition-all duration-300 hover:scale-105"
+                style={{
+                  backgroundColor: 'var(--color-accent-magenta)',
+                  color: 'var(--color-bg-deep)',
+                  boxShadow: '0 0 20px rgba(232, 42, 122, 0.4)'
+                }}
               >
                 {formStatus.isSubmitting ? (
                   'SENDING...'
@@ -226,79 +234,91 @@ export default function ContactSection() {
               </button>
             </div>
 
-            {formStatus.isSubmitted && (
-              <p className="text-accent font-mono text-sm">
-                Message sent successfully.
-              </p>
-            )}
-
-            {formStatus.error && (
-              <p className="text-red-400 font-mono text-sm">
-                {formStatus.error}
-              </p>
-            )}
+            <div className="mt-4 min-h-[24px]">
+              {formStatus.isSubmitted && (
+                <p className="font-mono text-sm" style={{ color: 'var(--color-accent-teal)' }}>
+                  Message sent successfully.
+                </p>
+              )}
+              {formStatus.error && (
+                <p className="text-red-400 font-mono text-sm">
+                  {formStatus.error}
+                </p>
+              )}
+            </div>
           </form>
 
           {/* Contact info */}
-          <div className="flex flex-col justify-center space-y-8">
+          <div className="flex flex-col justify-center space-y-10 relative z-10 border-t lg:border-t-0 lg:border-l border-white/10 pt-10 lg:pt-0 lg:pl-12">
             <div className="contact-info opacity-0">
-              <p className="font-mono text-xs uppercase tracking-widest text-text-muted mb-2">
+              <p className="font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--color-text-muted)' }}>
                 Email
               </p>
               <Link
                 href="mailto:hhhbhuwaneka@gmail.com"
-                className="font-display text-xl md:text-2xl font-bold text-accent hover:underline transition-all duration-200"
+                className="font-display text-xl md:text-2xl font-bold transition-all duration-300 hover:opacity-80 inline-block"
+                style={{ color: 'var(--color-accent-teal)' }}
               >
                 hhhbhuwaneka@gmail.com
               </Link>
             </div>
 
             <div className="contact-info opacity-0">
-              <p className="font-mono text-xs uppercase tracking-widest text-text-muted mb-2">
+              <p className="font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--color-text-muted)' }}>
                 Phone
               </p>
               <Link
                 href="tel:+94740224877"
-                className="font-display text-xl md:text-2xl font-bold text-text hover:text-accent transition-colors duration-200"
+                className="font-display text-xl md:text-2xl font-bold transition-colors duration-300 hover:opacity-80 inline-block"
+                style={{ color: 'var(--color-text-main)' }}
               >
                 +94 74 022 4877
               </Link>
             </div>
 
             <div className="contact-info opacity-0">
-              <p className="font-mono text-xs uppercase tracking-widest text-text-muted mb-2">
+              <p className="font-mono text-xs uppercase tracking-widest mb-2" style={{ color: 'var(--color-text-muted)' }}>
                 Location
               </p>
-              <p className="font-display text-xl md:text-2xl font-bold text-text">
+              <p className="font-display text-xl md:text-2xl font-bold" style={{ color: 'var(--color-text-main)' }}>
                 Colombo, Sri Lanka
               </p>
             </div>
 
-            <div className="contact-info opacity-0 flex gap-5 pt-4">
+            <div className="contact-info opacity-0 flex gap-6 pt-6">
               <Link
                 href="https://github.com/hhh-berzerk"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="text-text-subtle hover:text-accent transition-colors duration-200"
+                className="transition-colors duration-300 hover:-translate-y-1"
+                style={{ color: 'var(--color-text-muted)' }}
+                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent-teal)'}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-muted)'}
               >
-                <FiGithub size={22} />
+                <FiGithub size={28} />
               </Link>
               <Link
                 href="https://lk.linkedin.com/in/buwaneka-halpage-4351122a7"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="text-text-subtle hover:text-accent transition-colors duration-200"
+                className="transition-colors duration-300 hover:-translate-y-1"
+                style={{ color: 'var(--color-text-muted)' }}
+                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent-teal)'}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-muted)'}
               >
-                <FiLinkedin size={22} />
+                <FiLinkedin size={28} />
               </Link>
               <Link
                 href="mailto:hhhbhuwaneka@gmail.com"
                 aria-label="Email"
-                className="text-text-subtle hover:text-accent transition-colors duration-200"
+                className="transition-colors duration-300 hover:-translate-y-1"
+                style={{ color: 'var(--color-text-muted)' }}
+                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-accent-teal)'}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-text-muted)'}
               >
-                <FiMail size={22} />
+                <FiMail size={28} />
               </Link>
             </div>
           </div>

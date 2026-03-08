@@ -3,6 +3,9 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 import CustomCursor from './CustomCursor'
 import ScrollProgress from './ScrollProgress'
+import dynamic from 'next/dynamic'
+
+const Scene = dynamic(() => import('./canvas/Scene'), { ssr: false })
 
 export default function Layout({ children, title = 'Buwaneka Halpage — Software Engineer' }) {
   return (
@@ -17,12 +20,16 @@ export default function Layout({ children, title = 'Buwaneka Halpage — Softwar
       <CustomCursor />
       <ScrollProgress />
 
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-grow">
-          {children}
-        </main>
-        <Footer />
+      <Scene />
+
+      <div id="smooth-wrapper">
+        <div id="smooth-content" className="flex flex-col min-h-screen relative z-10 w-full">
+          <Navbar />
+          <main className="flex-grow w-full">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </div>
     </>
   )

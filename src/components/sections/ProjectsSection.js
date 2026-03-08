@@ -115,7 +115,7 @@ export default function ProjectsSection() {
         <p className="section-label">(03) Projects</p>
         <div className="w-full h-px bg-surface-lighter mb-16" />
 
-        <div>
+        <div className="glass-panel rounded-3xl overflow-hidden p-2 md:p-6 pb-0 shadow-2xl">
           {projects.map((project, i) => (
             <div key={project.number}>
               <Link
@@ -123,25 +123,25 @@ export default function ProjectsSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 ref={(el) => (rowRefs.current[i] = el)}
-                className="project-row group relative flex flex-col md:flex-row md:items-center justify-between py-8 md:py-10 opacity-0 cursor-pointer transition-colors duration-200 hover:bg-surface/50"
+                className="project-row group relative flex flex-col md:flex-row md:items-center justify-between p-6 md:p-8 opacity-0 cursor-pointer transition-colors duration-300 hover:bg-white/5 rounded-2xl mb-2"
               >
                 {/* Left side */}
                 <div className="flex items-start md:items-center gap-6 mb-4 md:mb-0">
-                  <span className="font-display text-2xl md:text-3xl font-bold text-text-subtle group-hover:text-text transition-all duration-200 group-hover:translate-x-2">
+                  <span className="font-display text-2xl md:text-3xl font-bold transition-all duration-300 group-hover:translate-x-2" style={{ color: 'var(--color-text-muted)' }}>
                     {project.number}
                   </span>
                   <div>
-                    <div className="flex items-center gap-3">
-                      <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-bold text-text group-hover:translate-x-2 transition-transform duration-200">
+                    <div className="flex items-center gap-4">
+                      <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-bold transition-transform duration-300 group-hover:translate-x-2" style={{ color: 'var(--color-text-main)' }}>
                         {project.title}
                       </h3>
                       {project.inProgress && (
-                        <span className="text-accent text-xs font-mono uppercase tracking-wider">
+                        <span className="text-xs font-mono uppercase tracking-wider px-2 py-1 rounded border border-[var(--color-accent-magenta)]" style={{ color: 'var(--color-accent-magenta)' }}>
                           In Progress
                         </span>
                       )}
                     </div>
-                    <p className="text-text-muted text-sm mt-1">
+                    <p className="text-sm mt-2 font-light" style={{ color: 'var(--color-text-muted)' }}>
                       {project.description}
                     </p>
                   </div>
@@ -153,15 +153,17 @@ export default function ProjectsSection() {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="font-mono text-[10px] uppercase tracking-wider text-text-subtle border border-surface-lighter px-2 py-1"
+                        className="font-mono text-[10px] uppercase tracking-wider px-3 py-1 rounded-full border border-white/10"
+                        style={{ color: 'var(--color-text-muted)' }}
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
                   <FiArrowRight
-                    size={20}
-                    className="text-text-subtle group-hover:text-accent group-hover:translate-x-1 transition-all duration-200"
+                    size={24}
+                    className="transition-all duration-300 group-hover:translate-x-2"
+                    style={{ color: 'var(--color-accent-teal)' }}
                   />
                 </div>
 

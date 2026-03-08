@@ -75,67 +75,66 @@ export default function EducationSection() {
         <div className="w-full h-px bg-surface-lighter mb-16" />
 
         {/* Education */}
-        <div>
+        <div className="glass-panel rounded-3xl overflow-hidden p-2 md:p-6 pb-0 shadow-2xl mb-16">
           {education.map((item) => (
             <div key={item.number}>
-              <div className="edu-row group flex flex-col md:flex-row md:items-start justify-between py-8 md:py-10 opacity-0">
+              <div className="edu-row group flex flex-col md:flex-row md:items-start justify-between p-6 md:p-8 opacity-0 transition-colors duration-300 hover:bg-white/5 rounded-2xl mb-2">
                 <div className="flex items-start gap-6 mb-4 md:mb-0 flex-1">
-                  <span className="font-display text-2xl md:text-3xl font-bold text-text-subtle group-hover:text-text transition-all duration-200 group-hover:translate-x-2">
+                  <span className="font-display text-2xl md:text-3xl font-bold transition-all duration-300 group-hover:translate-x-2" style={{ color: 'var(--color-text-muted)' }}>
                     {item.number}
                   </span>
                   <div className="flex-1">
-                    <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-bold text-text group-hover:translate-x-2 transition-transform duration-200">
+                    <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-bold transition-transform duration-300 group-hover:translate-x-2" style={{ color: 'var(--color-text-main)' }}>
                       {item.title}
                     </h3>
-                    <p className="text-accent text-sm font-mono mt-1">
+                    <p className="text-sm font-mono mt-2" style={{ color: 'var(--color-accent-teal)' }}>
                       {item.institution}
                     </p>
                     {item.description && (
-                      <p className="text-text-muted text-sm mt-2 max-w-xl">
+                      <p className="text-sm mt-3 max-w-xl font-light leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
                         {item.description}
                       </p>
                     )}
                   </div>
                 </div>
 
-                <span className="font-mono text-xs text-text-subtle uppercase tracking-wider pl-12 md:pl-0 md:text-right whitespace-nowrap mt-1">
+                <span className="font-mono text-xs uppercase tracking-wider pl-12 md:pl-0 md:text-right whitespace-nowrap mt-1" style={{ color: 'var(--color-text-muted)' }}>
                   {item.period}
                 </span>
               </div>
-              <div className="h-px bg-surface-lighter" />
+              <div className="h-px bg-white/5" />
             </div>
           ))}
         </div>
 
         {/* Certifications sub-header */}
-        <h3 className="font-mono text-xs uppercase tracking-widest text-text-muted mt-16 mb-8">
+        <h3 className="font-mono text-xs uppercase tracking-widest mt-16 mb-8 pl-4" style={{ color: 'var(--color-accent-purple)' }}>
           Certifications
         </h3>
-        <div className="h-px bg-surface-lighter mb-0" />
 
-        <div>
+        <div className="glass-panel rounded-3xl overflow-hidden p-2 md:p-6 pb-0 shadow-2xl">
           {certifications.map((item) => (
             <div key={item.number}>
-              <div className="edu-row group flex flex-col md:flex-row md:items-start justify-between py-8 md:py-10 opacity-0">
+              <div className="edu-row group flex flex-col md:flex-row md:items-start justify-between p-6 md:p-8 opacity-0 transition-colors duration-300 hover:bg-white/5 rounded-2xl mb-2">
                 <div className="flex items-start gap-6 mb-4 md:mb-0 flex-1">
-                  <span className="font-display text-2xl md:text-3xl font-bold text-text-subtle group-hover:text-text transition-all duration-200 group-hover:translate-x-2">
+                  <span className="font-display text-2xl md:text-3xl font-bold transition-all duration-300 group-hover:translate-x-2" style={{ color: 'var(--color-text-muted)' }}>
                     {item.number}
                   </span>
                   <div className="flex-1">
-                    <h3 className="font-display text-lg md:text-xl lg:text-2xl font-bold text-text group-hover:translate-x-2 transition-transform duration-200">
+                    <h3 className="font-display text-lg md:text-xl lg:text-2xl font-bold transition-transform duration-300 group-hover:translate-x-2" style={{ color: 'var(--color-text-main)' }}>
                       {item.title}
                     </h3>
-                    <p className="text-accent text-sm font-mono mt-1">
+                    <p className="text-sm font-mono mt-2" style={{ color: 'var(--color-accent-teal)' }}>
                       {item.institution}
                     </p>
                   </div>
                 </div>
 
-                <span className="font-mono text-xs text-text-subtle uppercase tracking-wider pl-12 md:pl-0 md:text-right whitespace-nowrap mt-1">
+                <span className="font-mono text-xs uppercase tracking-wider pl-12 md:pl-0 md:text-right whitespace-nowrap mt-1" style={{ color: 'var(--color-text-muted)' }}>
                   {item.period}
                 </span>
               </div>
-              <div className="h-px bg-surface-lighter" />
+              <div className="h-px bg-white/5" />
             </div>
           ))}
         </div>

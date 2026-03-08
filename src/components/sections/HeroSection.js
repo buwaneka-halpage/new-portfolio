@@ -155,33 +155,33 @@ export default function HeroSection() {
         </div>
 
         {/* Subtitle */}
-        <p className="hero-subtitle font-mono text-sm md:text-base text-text-muted tracking-wider uppercase mb-16 opacity-0">
+        <p className="hero-subtitle font-mono text-sm md:text-base tracking-wider uppercase mb-16 opacity-0" style={{ color: 'var(--color-accent-teal)' }}>
           Aspiring Software Engineer
         </p>
 
         {/* Stats Row */}
-        <div ref={statsRef} className="flex gap-12 md:gap-20 mb-20">
+        <div ref={statsRef} className="flex gap-12 md:gap-20 mb-20 p-8 glass-panel rounded-2xl w-fit">
           <div className="stat-item opacity-0">
-            <span className="stat-number block font-display text-4xl md:text-5xl font-bold text-text" data-value="3">
+            <span className="stat-number block font-display text-4xl md:text-5xl font-bold" style={{ color: 'var(--color-text-main)' }} data-value="3">
               0
             </span>
-            <span className="block font-mono text-xs text-text-muted uppercase tracking-wider mt-1">
+            <span className="block font-mono text-xs uppercase tracking-wider mt-1" style={{ color: 'var(--color-text-muted)' }}>
               Projects
             </span>
           </div>
           <div className="stat-item opacity-0">
-            <span className="stat-number block font-display text-4xl md:text-5xl font-bold text-text" data-value="3">
+            <span className="stat-number block font-display text-4xl md:text-5xl font-bold" style={{ color: 'var(--color-text-main)' }} data-value="3">
               0
             </span>
-            <span className="block font-mono text-xs text-text-muted uppercase tracking-wider mt-1">
+            <span className="block font-mono text-xs uppercase tracking-wider mt-1" style={{ color: 'var(--color-text-muted)' }}>
               Roles
             </span>
           </div>
           <div className="stat-item opacity-0">
-            <span className="block font-display text-4xl md:text-5xl font-bold text-accent">
+            <span className="block font-display text-4xl md:text-5xl font-bold" style={{ color: 'var(--color-accent-magenta)' }}>
               UOM
             </span>
-            <span className="block font-mono text-xs text-text-muted uppercase tracking-wider mt-1">
+            <span className="block font-mono text-xs uppercase tracking-wider mt-1" style={{ color: 'var(--color-text-muted)' }}>
               University
             </span>
           </div>
@@ -189,9 +189,9 @@ export default function HeroSection() {
       </div>
 
       {/* Marquee strip */}
-      <div className="hero-marquee w-full border-t border-b border-surface-lighter py-4 opacity-0">
+      <div className="hero-marquee w-full py-4 opacity-0 glass-panel border-x-0">
         <div className="marquee-track whitespace-nowrap">
-          <span className="inline-block font-mono text-sm text-text-muted tracking-widest uppercase">
+          <span className="inline-block font-mono text-sm tracking-widest uppercase" style={{ color: 'var(--color-text-muted)' }}>
             {marqueeText.repeat(6)}
           </span>
         </div>
