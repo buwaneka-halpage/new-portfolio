@@ -19,6 +19,9 @@ function MyApp({ Component, pageProps }) {
         smoothWheel: true,
       })
 
+      // Expose globally so Navbar can call lenis.scrollTo()
+      window.__lenis = lenis
+
       // Connect Lenis to GSAP ScrollTrigger
       lenis.on('scroll', ScrollTrigger.update)
       gsap.ticker.add((time) => lenis.raf(time * 1000))
