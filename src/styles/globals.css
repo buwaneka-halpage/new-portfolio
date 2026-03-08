@@ -22,7 +22,7 @@
 
   body {
     @apply antialiased;
-    background: transparent;
+    background: var(--color-bg-deep);
     overflow-x: hidden;
   }
 

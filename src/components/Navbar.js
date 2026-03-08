@@ -97,7 +97,7 @@ export default function Navbar() {
       {isOpen && (
         <div
           ref={overlayRef}
-          className="fixed inset-0 z-50 bg-[#0a0a0a] flex items-center justify-center opacity-0"
+          className="fixed inset-0 z-50 bg-bg flex items-center justify-center opacity-0"
         >
           <button
             className="absolute top-6 right-6 w-8 h-8 flex flex-col justify-center items-center"

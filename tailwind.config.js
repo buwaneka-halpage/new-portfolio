@@ -7,20 +7,24 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bg: '#0a0a0a',
+        // Base backgrounds — match CSS variables
+        bg: '#050508',
         surface: {
-          DEFAULT: '#111111',
-          light: '#1a1a1a',
-          lighter: '#222222',
+          DEFAULT: '#0e0e14',
+          light: '#141420',
+          // Used as 1px dividers and subtle borders
+          lighter: 'rgba(255, 255, 255, 0.06)',
         },
+        // Accent — teal primary, keeps 'accent' token name for existing class refs
         accent: {
-          DEFAULT: '#a8ff3e',
-          dim: 'rgba(168, 255, 62, 0.15)',
+          DEFAULT: '#0de2c8',
+          dim: 'rgba(13, 226, 200, 0.12)',
         },
+        // Text scale — match CSS variables
         text: {
-          DEFAULT: '#f0ede8',
-          muted: '#888888',
-          subtle: '#555555',
+          DEFAULT: '#f4f0fa',
+          muted: '#8b879c',
+          subtle: '#4a4a58',
         },
       },
       fontFamily: {
