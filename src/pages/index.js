@@ -25,13 +25,13 @@ export default function Home() {
   return (
     <Layout>
       <HeroSection />
-      <ChapterBridge number="01" label="THE ORIGIN" />
+      <ChapterBridge number="01" label="THE ENGINEER" />
       <AboutSection />
-      <ChapterBridge number="02" label="THE TOOLKIT" />
+      <ChapterBridge number="02" label="THE ARSENAL" />
       <SkillsSection />
       <ChapterBridge number="03" label="THE WORK" />
       <ProjectsSection />
-      <ChapterBridge number="04" label="THE JOURNEY" />
+      <ChapterBridge number="04" label="THE TRACK RECORD" />
       <ExperienceSection />
       <ChapterBridge number="05" label="THE FOUNDATION" />
       <EducationSection />

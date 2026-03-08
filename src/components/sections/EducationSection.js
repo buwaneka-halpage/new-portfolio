@@ -24,20 +24,50 @@ const education = [
 const certifications = [
   {
     number: '03',
-    title: 'THE COMPLETE WEB DEVELOPMENT BOOTCAMP',
-    institution: 'Udemy — Dr. Angela Yu',
-    period: '2023',
+    title: 'AWS CERTIFIED SOLUTIONS ARCHITECT — ASSOCIATE',
+    institution: 'Amazon Web Services',
+    period: '2024',
   },
   {
     number: '04',
-    title: 'HACKERRANK GOLD IN PYTHON',
-    institution: 'HackerRank',
-    period: '2023',
+    title: 'CERTIFIED KUBERNETES ADMINISTRATOR (CKA)',
+    institution: 'Cloud Native Computing Foundation',
+    period: '2024',
   },
   {
     number: '05',
-    title: 'C++ BEGINNER COURSE',
-    institution: 'Sololearn',
+    title: 'GOOGLE CLOUD PROFESSIONAL DATA ENGINEER',
+    institution: 'Google Cloud',
+    period: '2023',
+  },
+  {
+    number: '06',
+    title: 'META FRONTEND DEVELOPER PROFESSIONAL',
+    institution: 'Meta / Coursera',
+    period: '2023',
+  },
+  {
+    number: '07',
+    title: 'MONGODB ASSOCIATE DEVELOPER',
+    institution: 'MongoDB University',
+    period: '2023',
+  },
+  {
+    number: '08',
+    title: 'THE COMPLETE WEB DEVELOPMENT BOOTCAMP',
+    institution: 'Udemy — Dr. Angela Yu',
+    period: '2022',
+  },
+  {
+    number: '09',
+    title: 'TYPESCRIPT: THE COMPLETE DEVELOPER\'S GUIDE',
+    institution: 'Udemy — Stephen Grider',
+    period: '2022',
+  },
+  {
+    number: '10',
+    title: 'HACKERRANK GOLD IN PYTHON',
+    institution: 'HackerRank',
     period: '2022',
   },
 ]
@@ -52,13 +82,14 @@ export default function EducationSection() {
     const rows = sectionRef.current.querySelectorAll('.edu-row')
     gsap.fromTo(
       rows,
-      { y: 40, autoAlpha: 0 },
+      { y: 40, autoAlpha: 0, filter: 'blur(10px)' },
       {
         y: 0,
         autoAlpha: 1,
-        stagger: 0.12,
-        duration: 0.7,
-        ease: 'power2.out',
+        filter: 'blur(0px)',
+        stagger: 0.1,
+        duration: 1,
+        ease: 'power3.out',
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top 70%',

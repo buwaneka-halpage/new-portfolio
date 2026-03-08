@@ -16,18 +16,30 @@
     background: #0a0a0a;
   }
 
-  /* Noise grain overlay */
+  /* Animated film-grain overlay */
   body::before {
     content: '';
     position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
-    opacity: 0.03;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.038;
     pointer-events: none;
     z-index: 9999;
+    animation: grain 8s steps(1) infinite;
   }
 
-  /* Selection styling */
+  /* Vignette */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%);
+    pointer-events: none;
+    z-index: 9998;
+  }
+
   ::selection {
     background: #a8ff3e;
     color: #0a0a0a;
@@ -56,12 +68,11 @@
     max-width: 1400px;
   }
 
-  /* Section spacing */
   .section {
     @apply py-24 md:py-32;
+    position: relative;
   }
 
-  /* Section header */
   .section-label {
     @apply font-mono text-sm tracking-widest uppercase text-text-muted mb-4;
   }
@@ -71,7 +82,6 @@
     color: #f0ede8;
   }
 
-  /* Buttons */
   .btn-primary {
     @apply inline-flex items-center justify-center px-8 py-4 font-display font-semibold text-sm uppercase tracking-wider;
     background: #a8ff3e;
@@ -81,7 +91,7 @@
 
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 30px rgba(168, 255, 62, 0.3);
+    box-shadow: 0 0 40px rgba(168, 255, 62, 0.35);
   }
 
   .btn-outline {
@@ -126,8 +136,37 @@
 .cursor-ring.hovering {
   width: 60px;
   height: 60px;
-  background: rgba(168, 255, 62, 0.1);
+  background: rgba(168, 255, 62, 0.08);
   border-color: rgba(168, 255, 62, 0.8);
+}
+
+/* Ghost trail rings — jellyfish tail effect */
+.cursor-trail {
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99997;
+  top: 0;
+  left: 0;
+  border: 1px solid rgba(168, 255, 62, 0.25);
+}
+
+.cursor-trail-1 {
+  width: 28px;
+  height: 28px;
+  opacity: 0.45;
+}
+
+.cursor-trail-2 {
+  width: 20px;
+  height: 20px;
+  opacity: 0.28;
+}
+
+.cursor-trail-3 {
+  width: 14px;
+  height: 14px;
+  opacity: 0.15;
 }
 
 /* ─── Scroll Progress ──────────────────────── */
@@ -149,7 +188,7 @@
 }
 
 .marquee-track {
-  animation: marquee 25s linear infinite;
+  animation: marquee 30s linear infinite;
 }
 
 .marquee-track:hover {
@@ -172,6 +211,30 @@
   width: 100%;
 }
 
+/* ─── Grain animation ──────────────────────── */
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0) }
+  10%       { transform: translate(-2%, -3%) }
+  20%       { transform: translate(3%, -1%) }
+  30%       { transform: translate(-1%, 2%) }
+  40%       { transform: translate(2%, 3%) }
+  50%       { transform: translate(-3%, 1%) }
+  60%       { transform: translate(1%, -2%) }
+  70%       { transform: translate(3%, 2%) }
+  80%       { transform: translate(-2%, 3%) }
+  90%       { transform: translate(1%, -1%) }
+}
+
+/* ─── Float drift ──────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) }
+  50%       { transform: translateY(-18px) }
+}
+
+.float-slow {
+  animation: float 6s ease-in-out infinite;
+}
+
 /* ─── Reduced Motion ───────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -187,7 +250,8 @@
   }
 
   .cursor-dot,
-  .cursor-ring {
+  .cursor-ring,
+  .cursor-trail {
     display: none;
   }
 
@@ -203,7 +267,8 @@
   }
 
   .cursor-dot,
-  .cursor-ring {
+  .cursor-ring,
+  .cursor-trail {
     display: none !important;
   }
 }

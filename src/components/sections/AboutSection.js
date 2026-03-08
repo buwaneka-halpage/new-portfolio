@@ -13,16 +13,17 @@ export default function AboutSection() {
 
     const section = sectionRef.current
 
-    // Statement text — word-by-word stagger
+    // Statement text — word-by-word stagger with blur
     const words = section.querySelectorAll('.statement-word')
     gsap.fromTo(
       words,
-      { y: 30, autoAlpha: 0 },
+      { y: 30, autoAlpha: 0, filter: 'blur(6px)' },
       {
         y: 0,
         autoAlpha: 1,
-        stagger: 0.02,
-        duration: 0.6,
+        filter: 'blur(0px)',
+        stagger: 0.025,
+        duration: 0.9,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: section,
@@ -50,17 +51,18 @@ export default function AboutSection() {
       )
     }
 
-    // Bio columns fade in
+    // Bio columns — blur + slide
     const bioCols = section.querySelectorAll('.bio-col')
     gsap.fromTo(
       bioCols,
-      { y: 40, autoAlpha: 0 },
+      { y: 40, autoAlpha: 0, filter: 'blur(10px)' },
       {
         y: 0,
         autoAlpha: 1,
-        stagger: 0.2,
-        duration: 0.8,
-        ease: 'power2.out',
+        filter: 'blur(0px)',
+        stagger: 0.25,
+        duration: 1.1,
+        ease: 'power3.out',
         scrollTrigger: {
           trigger: bioCols[0],
           start: 'top 85%',
@@ -71,11 +73,12 @@ export default function AboutSection() {
   }, [])
 
   const statement =
-    "I'm a Computer Science student at the University of Moratuwa, driven by curiosity and passionate about building for the web."
+    "I'm a Senior Software Engineer with 6+ years shipping production systems — from fintech microservices to open-source tooling trusted by thousands of developers worldwide."
 
   const skillsList = [
-    'REACT', 'NEXT.JS', 'NODE', 'PYTHON', 'JAVA',
-    'GSAP', 'TAILWIND', 'MONGODB', 'EXPRESS', 'GIT',
+    'REACT', 'NEXT.JS', 'TYPESCRIPT', 'NODE.JS', 'PYTHON', 'GO',
+    'AWS', 'KUBERNETES', 'DOCKER', 'POSTGRESQL', 'REDIS', 'GRAPHQL',
+    'TAILWIND', 'GSAP', 'TERRAFORM', 'MONGODB', 'FASTAPI', 'GIT',
   ]
   const marqueeSkills = skillsList.join(' \u00B7 ') + ' \u00B7 '
 
@@ -117,16 +120,18 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20">
           <div className="bio-col opacity-0">
             <p className="text-text-muted leading-relaxed">
-              My journey began with simple coding challenges and evolved into a passion
-              for building efficient, user-friendly applications. I focus on creating
-              full-stack solutions that combine clean architecture with engaging interfaces.
+              Over six years I've built distributed systems processing millions of
+              daily transactions, led cross-functional engineering teams, and contributed
+              to open-source tools with thousands of active users. I care deeply about
+              clean architecture, developer experience, and software that scales.
             </p>
           </div>
           <div className="bio-col opacity-0">
             <p className="text-text-muted leading-relaxed">
-              Outside academics, I actively work with AIESEC and IEEE, developing
-              strong leadership and communication skills. These experiences have shaped
-              my approach to collaborative project work and problem-solving.
+              I've worked across fintech, SaaS, and cloud infrastructure — from
+              early-stage startups to enterprise teams at TechScale and DataVision.
+              Outside of code I mentor junior engineers, speak at local meetups, and
+              contribute to open-source projects in the Node.js and Kubernetes ecosystems.
             </p>
           </div>
         </div>
