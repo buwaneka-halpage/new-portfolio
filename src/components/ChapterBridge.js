@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import DecryptedText from './DecryptedText'
 
 export default function ChapterBridge({ number, label }) {
   const bridgeRef = useRef(null)
@@ -50,7 +51,13 @@ export default function ChapterBridge({ number, label }) {
         {number}
       </span>
       <span className="bridge-label block font-mono text-sm tracking-[0.3em] uppercase text-text-muted mt-4 opacity-0">
-        {label}
+        <DecryptedText
+          text={label}
+          className="text-text-muted"
+          encryptedClassName="text-accent/40"
+          speed={35}
+          revealDelay={400}
+        />
       </span>
     </div>
   )

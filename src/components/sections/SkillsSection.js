@@ -1,6 +1,7 @@
 import { useEffect, useRef, useCallback } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import SpotlightCard from '../SpotlightCard'
 
 const skillCategories = [
   {
@@ -109,7 +110,11 @@ export default function SkillsSection() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-12">
           {skillCategories.map((category, colIndex) => (
-            <div key={category.title} className={`skill-col-${colIndex}`}>
+            <SpotlightCard
+              key={category.title}
+              className={`skill-col-${colIndex} border border-surface-lighter p-6 md:p-8`}
+              spotlightColor="rgba(168, 255, 62, 0.08)"
+            >
               <h3 className="font-mono text-xs uppercase tracking-widest text-text-muted mb-8">
                 {category.title}
               </h3>
@@ -125,7 +130,7 @@ export default function SkillsSection() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </SpotlightCard>
           ))}
         </div>
       </div>

@@ -3,6 +3,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import Link from 'next/link'
 import { FiGithub, FiLinkedin, FiMail, FiArrowRight, FiCheck } from 'react-icons/fi'
+import SpotlightCard from '../SpotlightCard'
 
 function SplitChars({ text, className = '' }) {
   return (
@@ -371,7 +372,10 @@ export default function ContactSection() {
           </form>
 
           {/* ── Contact info ──────────────────────────────── */}
-          <div className="flex flex-col justify-center space-y-8">
+          <SpotlightCard
+            className="flex flex-col justify-center space-y-8 border border-surface-lighter p-8 md:p-12"
+            spotlightColor="rgba(168, 255, 62, 0.06)"
+          >
             <div className="contact-info opacity-0">
               <p className="font-mono text-xs uppercase tracking-widest text-text-muted mb-2">Email</p>
               <Link
@@ -415,7 +419,7 @@ export default function ContactSection() {
                 </Link>
               ))}
             </div>
-          </div>
+          </SpotlightCard>
         </div>
       </div>
 

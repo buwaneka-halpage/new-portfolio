@@ -3,7 +3,10 @@
     "allow": [
       "Skill(frontend-design)",
       "Skill(frontend-design:*)",
-      "WebFetch(domain:www.react-bits.dev)"
+      "WebFetch(domain:www.react-bits.dev)",
+      "WebFetch(domain:reactbits.dev)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(npx next:*)"
     ]
   }
 }

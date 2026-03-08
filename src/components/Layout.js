@@ -4,6 +4,7 @@ import Footer from './Footer'
 import CustomCursor from './CustomCursor'
 import ScrollProgress from './ScrollProgress'
 import AmbientOrbs from './AmbientOrbs'
+import ClickSpark from './ClickSpark'
 
 export default function Layout({ children, title = 'Buwaneka Halpage — Software Engineer' }) {
   return (
@@ -19,13 +20,15 @@ export default function Layout({ children, title = 'Buwaneka Halpage — Softwar
       <CustomCursor />
       <ScrollProgress />
 
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="flex-grow">
-          {children}
-        </main>
-        <Footer />
-      </div>
+      <ClickSpark sparkColor="#a8ff3e" sparkCount={8} sparkRadius={24} sparkSize={7} duration={480}>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <main className="flex-grow">
+            {children}
+          </main>
+          <Footer />
+        </div>
+      </ClickSpark>
     </>
   )
 }
