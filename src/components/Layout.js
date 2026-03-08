@@ -10,7 +10,7 @@ export default function Layout({ children, title = 'Buwaneka Halpage — Softwar
     <>
       <Head>
         <title>{title}</title>
-        <meta name="description" content="Portfolio of Buwaneka Halpage — Senior Software Engineer specialising in distributed systems, cloud infrastructure, and modern web applications." />
+        <meta name="description" content="Portfolio of Buwaneka Halpage — CS&E undergraduate at the University of Moratuwa, building full-stack projects and exploring modern software engineering." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

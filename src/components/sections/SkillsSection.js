@@ -5,19 +5,19 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 const skillCategories = [
   {
     title: 'Frontend',
-    skills: ['React', 'Next.js', 'TypeScript', 'Vue.js', 'Tailwind CSS', 'GraphQL', 'GSAP', 'Webpack / Vite'],
+    skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'JavaScript', 'GSAP', 'HTML / CSS'],
   },
   {
     title: 'Backend & Data',
-    skills: ['Node.js', 'Python', 'Go', 'Java', 'FastAPI', 'PostgreSQL', 'MongoDB', 'Redis', 'MySQL'],
+    skills: ['Node.js', 'Python', 'FastAPI', 'Express', 'MongoDB', 'PostgreSQL', 'MySQL', 'REST APIs'],
   },
   {
-    title: 'Cloud & DevOps',
-    skills: ['AWS', 'Docker', 'Kubernetes', 'Terraform', 'GitHub Actions', 'Nginx', 'Linux', 'CI / CD'],
+    title: 'Cyber Security',
+    skills: ['Kali Linux', 'Burp Suite', 'Wireshark', 'Nmap', 'Metasploit', 'OSINT', 'CTF', 'Network Security'],
   },
   {
-    title: 'Tools & Practices',
-    skills: ['Git', 'Figma', 'Jest / Cypress', 'Jira', 'Postman', 'REST APIs', 'Microservices', 'TDD'],
+    title: 'AI & Automation',
+    skills: ['OpenAI API', 'LangChain', 'n8n', 'Playwright', 'Scrapy', 'BeautifulSoup', 'Selenium', 'Puppeteer'],
   },
 ]
 

@@ -236,7 +236,7 @@ export default function ContactSection() {
 
       <div className="container relative">
         {/* Section label */}
-        <p className="section-label">(06) Contact</p>
+        <p className="section-label">(05) Contact</p>
 
         {/* Animated divider */}
         <div

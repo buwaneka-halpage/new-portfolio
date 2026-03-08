@@ -123,21 +123,24 @@
 .cursor-ring {
   width: 40px;
   height: 40px;
-  border: 1.5px solid rgba(168, 255, 62, 0.5);
+  border: 1.5px solid rgba(168, 255, 62, 0.75);
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
   z-index: 99998;
   top: 0;
   left: 0;
-  transition: width 0.3s ease, height 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 0 10px rgba(168, 255, 62, 0.35), 0 0 22px rgba(168, 255, 62, 0.12);
+  transition: width 0.3s ease, height 0.3s ease, background 0.3s ease,
+              border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .cursor-ring.hovering {
   width: 60px;
   height: 60px;
   background: rgba(168, 255, 62, 0.08);
-  border-color: rgba(168, 255, 62, 0.8);
+  border-color: rgba(168, 255, 62, 1);
+  box-shadow: 0 0 18px rgba(168, 255, 62, 0.6), 0 0 40px rgba(168, 255, 62, 0.2);
 }
 
 /* Ghost trail rings — jellyfish tail effect */
@@ -148,25 +151,26 @@
   z-index: 99997;
   top: 0;
   left: 0;
-  border: 1px solid rgba(168, 255, 62, 0.25);
+  border: 1px solid rgba(168, 255, 62, 0.45);
+  box-shadow: 0 0 8px rgba(168, 255, 62, 0.2);
 }
 
 .cursor-trail-1 {
   width: 28px;
   height: 28px;
-  opacity: 0.45;
+  opacity: 0.55;
 }
 
 .cursor-trail-2 {
   width: 20px;
   height: 20px;
-  opacity: 0.28;
+  opacity: 0.35;
 }
 
 .cursor-trail-3 {
   width: 14px;
   height: 14px;
-  opacity: 0.15;
+  opacity: 0.2;
 }
 
 /* ─── Scroll Progress ──────────────────────── */

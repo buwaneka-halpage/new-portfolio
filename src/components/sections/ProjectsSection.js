@@ -8,18 +8,19 @@ import { FiArrowRight } from 'react-icons/fi'
 const projects = [
   {
     number: '01',
-    title: 'ENTERPRISE FINTECH PLATFORM',
-    description: 'Distributed microservices architecture processing 2M+ daily transactions with sub-50ms p99 latency',
-    tags: ['React', 'Node.js', 'Kubernetes', 'Redis', 'PostgreSQL'],
+    title: 'FULL-STACK E-COMMERCE PLATFORM',
+    description: 'Complete online store with JWT auth, product search, cart, and Stripe payment integration',
+    tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
     image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80',
     liveLink: '#',
     githubLink: '#',
+    inProgress: true,
   },
   {
     number: '02',
-    title: 'AI CODE REVIEW TOOL',
-    description: 'ML-powered static analysis detecting security vulnerabilities and code smells across 12 languages',
-    tags: ['Python', 'FastAPI', 'OpenAI', 'React', 'PostgreSQL'],
+    title: 'AI CODE ANALYSIS TOOL',
+    description: 'Browser-based tool that uses the OpenAI API to review code, flag bugs, and suggest improvements',
+    tags: ['Python', 'FastAPI', 'OpenAI API', 'React'],
     image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=600&q=80',
     liveLink: '#',
     githubLink: '#',
@@ -27,47 +28,74 @@ const projects = [
   {
     number: '03',
     title: 'REAL-TIME ANALYTICS DASHBOARD',
-    description: 'Live data visualization platform ingesting 50M+ events/day with <200ms query response times',
-    tags: ['React', 'WebSockets', 'D3.js', 'Python', 'ClickHouse'],
+    description: 'Live data visualisation dashboard built with WebSockets and D3.js — tracks custom events in real time',
+    tags: ['React', 'WebSockets', 'D3.js', 'Node.js'],
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80',
     liveLink: '#',
     githubLink: '#',
   },
   {
     number: '04',
-    title: 'SAAS WORKFORCE MANAGER',
-    description: 'Multi-tenant HR SaaS platform serving 200+ organisations with Stripe billing and SSO',
-    tags: ['Next.js', 'Node.js', 'PostgreSQL', 'Stripe', 'Redis'],
+    title: 'WORKFORCE MANAGEMENT APP',
+    description: 'Multi-role HR web app with attendance tracking, leave management, and role-based access control',
+    tags: ['Next.js', 'Node.js', 'PostgreSQL', 'Tailwind'],
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80',
     liveLink: '#',
     githubLink: '#',
   },
   {
     number: '05',
-    title: 'CLOUD INFRA AUTOMATION',
-    description: 'Terraform + GitHub Actions pipeline cutting average deploy time from 45 min to 8 min',
-    tags: ['Terraform', 'AWS', 'Docker', 'Kubernetes', 'GitHub Actions'],
+    title: 'DEV ENVIRONMENT AUTOMATOR',
+    description: 'Shell + GitHub Actions setup that spins up a full dev environment with one command using Docker',
+    tags: ['Docker', 'GitHub Actions', 'Bash', 'AWS EC2'],
     image: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=600&q=80',
     liveLink: '#',
     githubLink: '#',
   },
   {
     number: '06',
-    title: 'OPEN-SOURCE CLI DEVTOOL',
-    description: 'TypeScript scaffolding CLI with plugin system — 2.4k GitHub stars, 40k+ weekly downloads',
-    tags: ['TypeScript', 'Node.js', 'Jest', 'Rollup'],
+    title: 'PROJECT SCAFFOLDING CLI',
+    description: 'npm CLI tool to scaffold Node.js and React projects with opinionated folder structure and configs',
+    tags: ['TypeScript', 'Node.js', 'Jest'],
     image: 'https://images.unsplash.com/photo-1629654297299-c8506221ca97?w=600&q=80',
     liveLink: '#',
     githubLink: '#',
   },
   {
     number: '07',
-    title: 'MOBILE SOCIAL PLATFORM',
-    description: 'Cross-platform professional networking app with real-time messaging and feed algorithm',
+    title: 'MOBILE SOCIAL APP',
+    description: 'React Native app prototype for student networking with real-time chat and profile matching',
     tags: ['React Native', 'Node.js', 'MongoDB', 'Socket.io'],
     image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&q=80',
     liveLink: '#',
     githubLink: 'https://github.com/hhh-berzerk/new-portfolio.git',
+  },
+  {
+    number: '08',
+    title: 'AI AGENT AUTOMATION SUITE',
+    description: 'Multi-step AI agent workflows built with LangChain and n8n — automates research, summarisation, and email reporting pipelines',
+    tags: ['Python', 'LangChain', 'n8n', 'OpenAI API'],
+    image: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&q=80',
+    liveLink: '#',
+    githubLink: '#',
+  },
+  {
+    number: '09',
+    title: 'WEB SCRAPING DATA PIPELINE',
+    description: 'Automated scraper using Playwright and BeautifulSoup to collect structured data, clean it, and push to a MongoDB store',
+    tags: ['Python', 'Playwright', 'BeautifulSoup', 'MongoDB'],
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&q=80',
+    liveLink: '#',
+    githubLink: '#',
+  },
+  {
+    number: '10',
+    title: 'CTF CHALLENGE TOOLKIT',
+    description: 'Personal collection of recon, exploitation, and OSINT scripts built and refined while competing in CTF competitions',
+    tags: ['Python', 'Bash', 'Kali Linux', 'OSINT'],
+    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&q=80',
+    liveLink: '#',
+    githubLink: '#',
   },
 ]
 
@@ -101,8 +129,7 @@ export default function ProjectsSection() {
     )
 
     // Cursor-following image preview for each project
-    const quickToX = []
-    const quickToY = []
+    const cleanups = []
 
     projects.forEach((_, i) => {
       const preview = previewRefs.current[i]
@@ -111,37 +138,33 @@ export default function ProjectsSection() {
 
       const qx = gsap.quickTo(preview, 'x', { duration: 0.3, ease: 'power2.out' })
       const qy = gsap.quickTo(preview, 'y', { duration: 0.3, ease: 'power2.out' })
-      quickToX.push(qx)
-      quickToY.push(qy)
 
-      const handleMouseEnter = () => {
-        gsap.to(preview, { autoAlpha: 1, scale: 1, duration: 0.3, ease: 'power2.out' })
-      }
+      const onEnter = () => gsap.to(preview, { autoAlpha: 1, scale: 1, duration: 0.3, ease: 'power2.out' })
+      const onLeave = () => gsap.to(preview, { autoAlpha: 0, scale: 0.9, duration: 0.2, ease: 'power2.in' })
+      const onMove  = (e) => { qx(e.clientX - 150); qy(e.clientY - 100) }
 
-      const handleMouseLeave = () => {
-        gsap.to(preview, { autoAlpha: 0, scale: 0.9, duration: 0.2, ease: 'power2.in' })
-      }
+      row.addEventListener('mouseenter', onEnter)
+      row.addEventListener('mouseleave', onLeave)
+      row.addEventListener('mousemove',  onMove)
 
-      const handleMouseMove = (e) => {
-        qx(e.clientX - 150)
-        qy(e.clientY - 100)
-      }
-
-      row.addEventListener('mouseenter', handleMouseEnter)
-      row.addEventListener('mouseleave', handleMouseLeave)
-      row.addEventListener('mousemove', handleMouseMove)
-
-      row._cleanup = () => {
-        row.removeEventListener('mouseenter', handleMouseEnter)
-        row.removeEventListener('mouseleave', handleMouseLeave)
-        row.removeEventListener('mousemove', handleMouseMove)
-      }
+      cleanups.push(() => {
+        row.removeEventListener('mouseenter', onEnter)
+        row.removeEventListener('mouseleave', onLeave)
+        row.removeEventListener('mousemove',  onMove)
+      })
     })
 
-    return () => {
-      projects.forEach((_, i) => {
-        if (rowRefs.current[i]?._cleanup) rowRefs.current[i]._cleanup()
+    // Scroll doesn't fire mouseleave — hide every preview immediately on any scroll
+    const hideAll = () => {
+      previewRefs.current.forEach((p) => {
+        if (p) gsap.to(p, { autoAlpha: 0, scale: 0.9, duration: 0.15, overwrite: true })
       })
+    }
+    window.addEventListener('scroll', hideAll, { passive: true })
+
+    return () => {
+      cleanups.forEach((fn) => fn())
+      window.removeEventListener('scroll', hideAll)
     }
   }, [])
 
