@@ -2,12 +2,6 @@ import { useEffect, useState, useRef } from 'react'
 
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&'
 
-/**
- * DecryptedText — inspired by React Bits (react-bits.dev).
- * Rewritten without Framer Motion to match our GSAP-only stack.
- * Animates on scroll into view. Each character is revealed left-to-right
- * while unresolved chars cycle through random glyphs.
- */
 export default function DecryptedText({
   text,
   className = '',
@@ -15,61 +9,61 @@ export default function DecryptedText({
   speed = 40,
   revealDelay = 0,
 }) {
-  const [display, setDisplay] = useState(() => text.split('').map(() => CHARS[Math.floor(Math.random() * CHARS.length)]))
-  const [revealedCount, setRevealedCount] = useState(0)
-  const [started, setStarted] = useState(false)
-  const ref = useRef(null)
+  // Start with real text so SSR and client initial render match exactly
+  const [chars, setChars] = useState(() => text.split(''))
+  const containerRef = useRef(null)
+  const revealedRef = useRef(0)   // track progress without being a dep
+  const intervalRef = useRef(null)
 
-  // Trigger when in view
+  const startScramble = () => {
+    revealedRef.current = 0
+    clearInterval(intervalRef.current)
+
+    intervalRef.current = setInterval(() => {
+      const revealed = revealedRef.current
+
+      setChars(text.split('').map((ch, i) => {
+        if (i < revealed) return ch
+        return CHARS[Math.floor(Math.random() * CHARS.length)]
+      }))
+
+      revealedRef.current += 1
+
+      if (revealed >= text.length) {
+        clearInterval(intervalRef.current)
+        // Settle on real text
+        setChars(text.split(''))
+      }
+    }, speed)
+  }
+
   useEffect(() => {
-    const el = ref.current
+    const el = containerRef.current
     if (!el) return
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setTimeout(() => setStarted(true), revealDelay)
+          setTimeout(startScramble, revealDelay)
           observer.disconnect()
         }
       },
       { threshold: 0.3 }
     )
     observer.observe(el)
-    return () => observer.disconnect()
-  }, [revealDelay])
 
-  // Reveal chars one by one + scramble unrevealed
-  useEffect(() => {
-    if (!started) return
-
-    const interval = setInterval(() => {
-      setRevealedCount((prev) => {
-        const next = prev + 1
-        if (next > text.length) {
-          clearInterval(interval)
-          return text.length
-        }
-        return next
-      })
-
-      setDisplay((prev) =>
-        prev.map((_, i) => {
-          if (i < revealedCount) return text[i]
-          return CHARS[Math.floor(Math.random() * CHARS.length)]
-        })
-      )
-    }, speed)
-
-    return () => clearInterval(interval)
-  }, [started, revealedCount, text, speed])
+    return () => {
+      observer.disconnect()
+      clearInterval(intervalRef.current)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
-    <span ref={ref} aria-label={text} className="inline-block whitespace-pre-wrap">
-      {display.map((char, i) => (
-        <span
-          key={i}
-          className={i < revealedCount ? className : encryptedClassName}
-        >
-          {text[i] === ' ' ? '\u00A0' : char}
+    <span ref={containerRef} aria-label={text} className="inline-block whitespace-pre-wrap">
+      {chars.map((char, i) => (
+        <span key={i} className={i < revealedRef.current ? className : encryptedClassName}>
+          {char === ' ' ? '\u00A0' : char}
         </span>
       ))}
     </span>
