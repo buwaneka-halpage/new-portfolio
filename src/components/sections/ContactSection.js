@@ -45,13 +45,25 @@ export default function ContactSection() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setFormStatus({ isSubmitting: true, isSubmitted: false, error: null })
-    setTimeout(() => {
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.message || 'Something went wrong')
+      }
+
       setFormStatus({ isSubmitting: false, isSubmitted: true, error: null })
       setFormData({ name: '', email: '', message: '' })
-      setTimeout(() => {
-        setFormStatus((prev) => ({ ...prev, isSubmitted: false }))
-      }, 5000)
-    }, 1500)
+      setTimeout(() => setFormStatus((prev) => ({ ...prev, isSubmitted: false })), 5000)
+    } catch (err) {
+      setFormStatus({ isSubmitting: false, isSubmitted: false, error: err.message })
+    }
   }
 
   // Animate success message in whenever it appears
