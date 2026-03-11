@@ -10,7 +10,7 @@ const skillCategories = [
   },
   {
     title: 'Backend & Data',
-    skills: ['Node.js', 'Python', 'FastAPI', 'Express', 'MongoDB', 'PostgreSQL', 'MySQL', 'REST APIs'],
+    skills: ['Node.js', 'Python', 'FastAPI', 'Express', 'MongoDB', 'PostgreSQL', 'GraphQL', 'REST APIs', 'WebSockets', 'Webhooks'],
   },
   {
     title: 'Cyber Security',
@@ -18,7 +18,7 @@ const skillCategories = [
   },
   {
     title: 'AI & Automation',
-    skills: ['OpenAI API', 'LangChain', 'n8n', 'Playwright', 'Scrapy', 'BeautifulSoup', 'Selenium', 'Puppeteer'],
+    skills: ['Google ADK', 'Gemini API', 'FastMCP', 'AI Agents', 'n8n', 'Playwright', 'Scrapy', 'Puppeteer'],
   },
 ]
 
