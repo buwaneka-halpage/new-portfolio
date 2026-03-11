@@ -101,14 +101,11 @@ const projects = [
 
 export default function ProjectsSection() {
   const sectionRef = useRef(null)
-  const previewRefs = useRef([])
-  const rowRefs = useRef([])
 
   useEffect(() => {
     if (!sectionRef.current) return
     gsap.registerPlugin(ScrollTrigger)
 
-    // Row entrance animations
     const rows = sectionRef.current.querySelectorAll('.project-row')
     gsap.fromTo(
       rows,
@@ -127,45 +124,6 @@ export default function ProjectsSection() {
         },
       }
     )
-
-    // Cursor-following image preview for each project
-    const cleanups = []
-
-    projects.forEach((_, i) => {
-      const preview = previewRefs.current[i]
-      const row = rowRefs.current[i]
-      if (!preview || !row) return
-
-      const qx = gsap.quickTo(preview, 'x', { duration: 0.3, ease: 'power2.out' })
-      const qy = gsap.quickTo(preview, 'y', { duration: 0.3, ease: 'power2.out' })
-
-      const onEnter = () => gsap.to(preview, { autoAlpha: 1, scale: 1, duration: 0.3, ease: 'power2.out' })
-      const onLeave = () => gsap.to(preview, { autoAlpha: 0, scale: 0.9, duration: 0.2, ease: 'power2.in' })
-      const onMove  = (e) => { qx(e.clientX - 150); qy(e.clientY - 100) }
-
-      row.addEventListener('mouseenter', onEnter)
-      row.addEventListener('mouseleave', onLeave)
-      row.addEventListener('mousemove',  onMove)
-
-      cleanups.push(() => {
-        row.removeEventListener('mouseenter', onEnter)
-        row.removeEventListener('mouseleave', onLeave)
-        row.removeEventListener('mousemove',  onMove)
-      })
-    })
-
-    // Scroll doesn't fire mouseleave — hide every preview immediately on any scroll
-    const hideAll = () => {
-      previewRefs.current.forEach((p) => {
-        if (p) gsap.to(p, { autoAlpha: 0, scale: 0.9, duration: 0.15, overwrite: true })
-      })
-    }
-    window.addEventListener('scroll', hideAll, { passive: true })
-
-    return () => {
-      cleanups.forEach((fn) => fn())
-      window.removeEventListener('scroll', hideAll)
-    }
   }, [])
 
   return (
@@ -175,40 +133,47 @@ export default function ProjectsSection() {
         <div className="w-full h-px bg-surface-lighter mb-16" />
 
         <div>
-          {projects.map((project, i) => (
+          {projects.map((project) => (
             <div key={project.number}>
               <Link
                 href={project.liveLink !== '#' ? project.liveLink : (project.githubLink || '#')}
                 target="_blank"
                 rel="noopener noreferrer"
-                ref={(el) => (rowRefs.current[i] = el)}
-                className="project-row group relative flex flex-col md:flex-row md:items-center justify-between py-8 md:py-10 opacity-0 cursor-pointer transition-colors duration-200 hover:bg-surface/50"
+                className="project-row group flex flex-col md:flex-row md:items-center gap-6 py-8 md:py-10 opacity-0 cursor-pointer transition-colors duration-200 hover:bg-surface/50"
               >
-                {/* Left side */}
-                <div className="flex items-start md:items-center gap-6 mb-4 md:mb-0">
-                  <span className="font-display text-2xl md:text-3xl font-bold text-text-subtle group-hover:text-text transition-all duration-200 group-hover:translate-x-2">
+                {/* Left: number + title + description */}
+                <div className="flex items-start md:items-center gap-6 flex-1 min-w-0">
+                  <span className="font-display text-2xl md:text-3xl font-bold text-text-subtle group-hover:text-text transition-all duration-200 group-hover:translate-x-2 flex-shrink-0">
                     {project.number}
                   </span>
-                  <div>
-                    <div className="flex items-center gap-3">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-3 flex-wrap">
                       <h3 className="font-display text-xl md:text-2xl lg:text-3xl font-bold text-text group-hover:translate-x-2 transition-transform duration-200">
                         {project.title}
                       </h3>
                       {project.inProgress && (
-                        <span className="text-accent text-xs font-mono uppercase tracking-wider">
+                        <span className="text-accent text-xs font-mono uppercase tracking-wider flex-shrink-0">
                           In Progress
                         </span>
                       )}
                     </div>
-                    <p className="text-text-muted text-sm mt-1">
-                      {project.description}
-                    </p>
+                    <p className="text-text-muted text-sm mt-1">{project.description}</p>
                   </div>
                 </div>
 
-                {/* Right side */}
-                <div className="flex items-center gap-6 pl-12 md:pl-0">
-                  <div className="hidden md:flex gap-2">
+                {/* Center: image — fades in on hover, desktop only */}
+                <div className="hidden md:block flex-shrink-0 w-[220px] h-[140px] relative rounded-lg overflow-hidden opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transition-all duration-300 ease-out">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+
+                {/* Right: tags + arrow */}
+                <div className="flex items-center gap-4 md:flex-shrink-0 pl-12 md:pl-0">
+                  <div className="hidden lg:flex gap-2 flex-wrap justify-end">
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
@@ -220,28 +185,11 @@ export default function ProjectsSection() {
                   </div>
                   <FiArrowRight
                     size={20}
-                    className="text-text-subtle group-hover:text-accent group-hover:translate-x-1 transition-all duration-200"
+                    className="text-text-subtle group-hover:text-accent group-hover:translate-x-1 transition-all duration-200 flex-shrink-0"
                   />
-                </div>
-
-                {/* Cursor-following image preview (desktop only) */}
-                <div
-                  ref={(el) => (previewRefs.current[i] = el)}
-                  className="hidden md:block fixed pointer-events-none z-50 opacity-0"
-                  style={{ transform: 'scale(0.9)' }}
-                >
-                  <div className="relative w-[300px] h-[200px] rounded-lg overflow-hidden shadow-2xl">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      style={{ objectFit: 'cover' }}
-                    />
-                  </div>
                 </div>
               </Link>
 
-              {/* Separator */}
               <div className="h-px bg-surface-lighter" />
             </div>
           ))}
