@@ -1,7 +1,8 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import Layout from '@/components/Layout'
+import Preloader from '@/components/Preloader'
 import HeroSection from '@/components/sections/HeroSection'
 import ChapterBridge from '@/components/ChapterBridge'
 import AboutSection from '@/components/sections/AboutSection'
@@ -12,6 +13,8 @@ import EducationSection from '@/components/sections/EducationSection'
 import ContactSection from '@/components/sections/ContactSection'
 
 export default function Home() {
+  const [isLoaded, setIsLoaded] = useState(false)
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
 
@@ -24,7 +27,8 @@ export default function Home() {
 
   return (
     <Layout>
-      <HeroSection />
+      {!isLoaded && <Preloader onComplete={() => setIsLoaded(true)} />}
+      <HeroSection isLoaded={isLoaded} />
       <ChapterBridge number="01" label="THE ENGINEER" />
       <AboutSection />
       <ChapterBridge number="02" label="THE ARSENAL" />

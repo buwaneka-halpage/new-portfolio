@@ -17,7 +17,7 @@ function SplitChars({ text, className = '' }) {
   )
 }
 
-export default function HeroSection() {
+export default function HeroSection({ isLoaded = true }) {
   const sectionRef = useRef(null)
   const statsRef = useRef(null)
   const scrollIndicatorRef = useRef(null)
@@ -25,11 +25,11 @@ export default function HeroSection() {
   const line2Ref = useRef(null)
   const glowRef = useRef(null)
 
-  // Entrance animation
+  // Entrance animation — waits for preloader to finish
   useEffect(() => {
-    if (!sectionRef.current) return
+    if (!sectionRef.current || !isLoaded) return
 
-    const tl = gsap.timeline({ delay: 0.3 })
+    const tl = gsap.timeline()
 
     tl.fromTo(
       '.hero-label',
@@ -98,38 +98,33 @@ export default function HeroSection() {
     }
 
     return () => { tl.kill() }
-  }, [])
+  }, [isLoaded])
 
   // Mouse parallax — text layers at different depths
   useEffect(() => {
+    // quickTo pre-creates setters per property — avoids creating new GSAP
+    // instances on every mousemove (which was the main perf bottleneck on desktop)
+    const setLine1X = gsap.quickTo(line1Ref.current, 'x', { duration: 1.6, ease: 'power2.out' })
+    const setLine1Y = gsap.quickTo(line1Ref.current, 'y', { duration: 1.6, ease: 'power2.out' })
+    const setLine2X = gsap.quickTo(line2Ref.current, 'x', { duration: 2, ease: 'power2.out' })
+    const setLine2Y = gsap.quickTo(line2Ref.current, 'y', { duration: 2, ease: 'power2.out' })
+    const setLabelX = gsap.quickTo('.hero-label', 'x', { duration: 2.2, ease: 'power2.out' })
+    const setStatsX = statsRef.current ? gsap.quickTo(statsRef.current, 'x', { duration: 2.4, ease: 'power2.out' }) : null
+    const setStatsY = statsRef.current ? gsap.quickTo(statsRef.current, 'y', { duration: 2.4, ease: 'power2.out' }) : null
+
     const handleParallax = (e) => {
       const xPct = e.clientX / window.innerWidth - 0.5
       const yPct = e.clientY / window.innerHeight - 0.5
 
-      gsap.to(line1Ref.current, {
-        x: xPct * 28, y: yPct * 14,
-        duration: 1.6, ease: 'power2.out',
-      })
-      gsap.to(line2Ref.current, {
-        x: xPct * -18, y: yPct * -10,
-        duration: 2, ease: 'power2.out',
-      })
-      gsap.to('.hero-label', {
-        x: xPct * 10,
-        duration: 2.2, ease: 'power2.out',
-      })
-      if (statsRef.current) {
-        gsap.to(statsRef.current, {
-          x: xPct * 8, y: yPct * 6,
-          duration: 2.4, ease: 'power2.out',
-        })
-      }
-      if (glowRef.current) {
-        gsap.to(glowRef.current, {
-          x: xPct * -40, y: yPct * -30,
-          duration: 3, ease: 'power2.out',
-        })
-      }
+      setLine1X(xPct * 28)
+      setLine1Y(yPct * 14)
+      setLine2X(xPct * -18)
+      setLine2Y(yPct * -10)
+      setLabelX(xPct * 10)
+      if (setStatsX) setStatsX(xPct * 8)
+      if (setStatsY) setStatsY(yPct * 6)
+      // Glow is excluded: animating a blur(60px) element on every mousemove
+      // forces the browser to recomposite the blur filter each frame
     }
 
     window.addEventListener('mousemove', handleParallax)
