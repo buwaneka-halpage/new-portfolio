@@ -238,7 +238,7 @@ export default function AboutSection() {
               <div className="bio-col opacity-0">
                 <p className="text-text-muted leading-relaxed">
                   I started writing code in school and haven't stopped since. Now studying
-                  CS&amp;E at UOM, I spend most of my time building full-stack projects,
+                  CSE at UOM, I spend most of my time building full-stack projects,
                   exploring system design patterns, and pushing the boundaries of what I
                   can ship solo or in small teams.
                 </p>

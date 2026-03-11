@@ -7,7 +7,7 @@ const experiences = [
     number: '01',
     title: 'SOFTWARE ENGINEER',
     organization: 'AIESEC in Sri Lanka',
-    period: 'Feb 2025 — Present',
+    period: 'Feb 2025 — Jan 2026',
     description:
       'Building and maintaining internal web applications that support global talent exchange operations. Working with React, Node.js, and MongoDB to deliver features used by the local and national AIESEC teams.',
   },
@@ -31,7 +31,7 @@ const experiences = [
     number: '04',
     title: 'FIELD REPRESENTATIVE',
     organization: 'University of Moratuwa',
-    period: 'Mar 2025 — Present',
+    period: 'Mar 2025 — Jan 2026',
     description:
       'Elected representative for the 23rd batch of Computer Science & Engineering. Bridging communication between the student body and faculty on academic and welfare matters.',
   },

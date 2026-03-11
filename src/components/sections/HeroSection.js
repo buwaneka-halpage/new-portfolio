@@ -136,7 +136,7 @@ export default function HeroSection() {
     return () => window.removeEventListener('mousemove', handleParallax)
   }, [])
 
-  const marqueeText = 'AVAILABLE FOR WORK \u00B7 CS&E UNDERGRADUATE \u00B7 FULL-STACK DEV \u00B7 CYBER SECURITY \u00B7 AI AGENTS \u00B7 WEB SCRAPING \u00B7 AUTOMATION \u00B7 UNIVERSITY OF MORATUWA \u00B7 '
+  const marqueeText = 'AVAILABLE FOR WORK \u00B7 CSE UNDERGRADUATE \u00B7 FULL-STACK DEV \u00B7 CYBER SECURITY \u00B7 AI AGENTS \u00B7 WEB SCRAPING \u00B7 AUTOMATION \u00B7 UNIVERSITY OF MORATUWA \u00B7 '
 
   return (
     <section
@@ -185,7 +185,7 @@ export default function HeroSection() {
 
         {/* Subtitle */}
         <p className="hero-subtitle font-mono text-sm md:text-base text-text-muted tracking-wider uppercase mb-16 opacity-0">
-          CS&amp;E Undergrad · Full-Stack · Security · AI Automation
+          CSE Undergrad · Full-Stack · Security · AI Automation
         </p>
 
         {/* Stats Row */}
