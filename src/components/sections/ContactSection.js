@@ -262,7 +262,7 @@ export default function ContactSection() {
         <div className="mb-16">
           <h2
             className="font-display font-extrabold leading-[0.9] tracking-tight"
-            style={{ fontSize: 'clamp(2.5rem, 7.5vw, 8rem)' }}
+            style={{ fontSize: 'clamp(2rem, 8vw, 8rem)' }}
           >
             <span className="block overflow-hidden whitespace-nowrap">
               <SplitChars text="LET'S WORK" className="cta-line-1" />

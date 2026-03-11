@@ -76,6 +76,43 @@ export default function Navbar() {
         aria-hidden="true"
       />
 
+      {/* Mobile full-screen overlay — outside header to avoid mix-blend-difference */}
+      {isOpen && (
+        <div
+          ref={overlayRef}
+          className="fixed inset-0 z-50 bg-[#0a0a0a] flex items-center justify-center opacity-0"
+        >
+          <button
+            className="absolute top-6 right-6 w-8 h-8 flex flex-col justify-center items-center"
+            onClick={() => setIsOpen(false)}
+            aria-label="Close menu"
+          >
+            <span className="block w-6 h-px bg-white rotate-45 translate-y-[0.5px]" />
+            <span className="block w-6 h-px bg-white -rotate-45 -translate-y-[0.5px]" />
+          </button>
+
+          <nav className="text-center">
+            <ul className="flex flex-col gap-6">
+              {navLinks.map((link, i) => (
+                <li key={link.name}>
+                  <a
+                    ref={(el) => (linksRef.current[i] = el)}
+                    href={link.href}
+                    onClick={(e) => handleNavClick(e, link.href)}
+                    className="block font-display text-4xl sm:text-5xl font-bold text-white hover:text-accent transition-colors duration-200 opacity-0 cursor-pointer"
+                  >
+                    <span className="font-mono text-sm text-text-subtle mr-3">
+                      {link.number}
+                    </span>
+                    {link.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      )}
+
       <header className="fixed top-0 w-full z-50 mix-blend-difference">
         <nav className="container flex items-center justify-between h-20">
           {/* Logo */}
@@ -114,43 +151,6 @@ export default function Navbar() {
             <span className={`block w-6 h-px bg-white transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-[3.5px]' : ''}`} />
           </button>
         </nav>
-
-        {/* Mobile full-screen overlay */}
-        {isOpen && (
-          <div
-            ref={overlayRef}
-            className="fixed inset-0 z-50 bg-[#0a0a0a] flex items-center justify-center opacity-0"
-          >
-            <button
-              className="absolute top-6 right-6 w-8 h-8 flex flex-col justify-center items-center"
-              onClick={() => setIsOpen(false)}
-              aria-label="Close menu"
-            >
-              <span className="block w-6 h-px bg-white rotate-45 translate-y-[0.5px]" />
-              <span className="block w-6 h-px bg-white -rotate-45 -translate-y-[0.5px]" />
-            </button>
-
-            <nav className="text-center">
-              <ul className="flex flex-col gap-6">
-                {navLinks.map((link, i) => (
-                  <li key={link.name}>
-                    <a
-                      ref={(el) => (linksRef.current[i] = el)}
-                      href={link.href}
-                      onClick={(e) => handleNavClick(e, link.href)}
-                      className="block font-display text-4xl sm:text-5xl font-bold text-white hover:text-accent transition-colors duration-200 opacity-0 cursor-pointer"
-                    >
-                      <span className="font-mono text-sm text-text-subtle mr-3">
-                        {link.number}
-                      </span>
-                      {link.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-        )}
       </header>
     </>
   )
