@@ -17,7 +17,7 @@ function SplitChars({ text, className = '' }) {
   )
 }
 
-export default function HeroSection() {
+export default function HeroSection({ isLoaded = true }) {
   const sectionRef = useRef(null)
   const statsRef = useRef(null)
   const scrollIndicatorRef = useRef(null)
@@ -25,11 +25,11 @@ export default function HeroSection() {
   const line2Ref = useRef(null)
   const glowRef = useRef(null)
 
-  // Entrance animation
+  // Entrance animation — waits for preloader to finish
   useEffect(() => {
-    if (!sectionRef.current) return
+    if (!sectionRef.current || !isLoaded) return
 
-    const tl = gsap.timeline({ delay: 0.3 })
+    const tl = gsap.timeline()
 
     tl.fromTo(
       '.hero-label',
@@ -98,7 +98,7 @@ export default function HeroSection() {
     }
 
     return () => { tl.kill() }
-  }, [])
+  }, [isLoaded])
 
   // Mouse parallax — text layers at different depths
   useEffect(() => {
