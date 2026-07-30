@@ -9,7 +9,7 @@ const experiences = [
     organization: 'CritiCo',
     period: 'Feb 2026 — Present',
     description:
-      'Founded an AI-focused venture building agentic systems and data-driven products. Lead product discovery and delivery across frontend, backend, data, and AI — including an immigration CRM, Temple Gate Solicitors' RAG assistant, and the Prime Apostille website.',
+      "Founded an AI-focused venture building agentic systems and data-driven products. Lead product discovery and delivery across frontend, backend, data, and AI — including an immigration CRM, Temple Gate Solicitors' RAG assistant, and the Prime Apostille website.",
   },
   {
     number: '02',
@@ -33,7 +33,7 @@ const experiences = [
     organization: 'SLIoT Challenge 2026',
     period: 'Dec 2025 — May 2026',
     description:
-      'Led a cross-functional committee delivering Sri Lanka's national IoT competition with IESL and SLT-Mobitel across university, school, and open categories over a five-month cycle.',
+      "Led a cross-functional committee delivering Sri Lanka's national IoT competition with IESL and SLT-Mobitel across university, school, and open categories over a five-month cycle.",
   },
   {
     number: '05',

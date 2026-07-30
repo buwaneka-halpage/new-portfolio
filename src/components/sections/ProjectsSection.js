@@ -80,7 +80,7 @@ const projects = [
     number: '08',
     title: 'TEMPLE GATE RAG ASSISTANT',
     description:
-      'Responsive SEO website and retrieval-augmented assistant for Temple Gate Solicitors, grounded in the firm's case studies',
+      "Responsive SEO website and retrieval-augmented assistant for Temple Gate Solicitors, grounded in the firm's case studies",
     tags: ['RAG', 'Next.js', 'AI'],
     image: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=600&q=80',
     liveLink: '#',
