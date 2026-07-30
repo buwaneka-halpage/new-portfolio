@@ -5,35 +5,51 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 const experiences = [
   {
     number: '01',
-    title: 'SOFTWARE ENGINEER',
-    organization: 'AIESEC in Sri Lanka',
-    period: 'Feb 2025 — Jan 2026',
+    title: 'FOUNDER',
+    organization: 'CritiCo',
+    period: 'Feb 2026 — Present',
     description:
-      'Building and maintaining internal web applications that support global talent exchange operations. Working with React, Node.js, and MongoDB to deliver features used by the local and national AIESEC teams.',
+      'Founded an AI-focused venture building agentic systems and data-driven products. Lead product discovery and delivery across frontend, backend, data, and AI — including an immigration CRM, Temple Gate Solicitors' RAG assistant, and the Prime Apostille website.',
   },
   {
     number: '02',
-    title: 'FREELANCE WEB DEVELOPER',
-    organization: 'Self-Employed',
-    period: '2023 — Present',
+    title: 'SOFTWARE ENGINEER',
+    organization: 'Mobile App Mart',
+    period: 'Feb 2026 — Jul 2026',
     description:
-      'Designing and building websites and web apps for small businesses and individuals. Projects span landing pages, e-commerce stores, and custom dashboards — handling everything from UI to deployment.',
+      'Independently built an end-to-end invoice automation platform for Studio Nicholson (UK) — Gmail monitoring, AI PDF extraction, invoice-coding rules, Xero sync, and a React review dashboard. Configured Google Cloud, OAuth, and Gmail APIs for secure ingestion.',
   },
   {
     number: '03',
-    title: 'oGT MED TEAM LEADER',
-    organization: 'AIESEC',
-    period: 'Jul 2024 — Feb 2025',
+    title: 'SOFTWARE ENGINEER',
+    organization: 'AIESEC in Sri Lanka',
+    period: 'Mar 2025 — Oct 2025',
     description:
-      'Led a team facilitating outgoing global talent exchanges. Managed recruitment, selection, and onboarding pipelines while coordinating with partner organisations across multiple countries.',
+      'Built and maintained the AIESEC Exchange Data Platform and internal apps with Next.js, TypeScript, Node.js, and MongoDB. Migrated exchange data from legacy SQL to MongoDB and developed operational dashboards and data-management tools.',
   },
   {
     number: '04',
-    title: 'FIELD REPRESENTATIVE',
-    organization: 'University of Moratuwa',
-    period: 'Mar 2025 — Jan 2026',
+    title: 'CHAIRPERSON',
+    organization: 'SLIoT Challenge 2026',
+    period: 'Dec 2025 — May 2026',
     description:
-      'Elected representative for the 23rd batch of Computer Science & Engineering. Bridging communication between the student body and faculty on academic and welfare matters.',
+      'Led a cross-functional committee delivering Sri Lanka's national IoT competition with IESL and SLT-Mobitel across university, school, and open categories over a five-month cycle.',
+  },
+  {
+    number: '05',
+    title: 'ASSISTANT DIRECTOR — PARTNERSHIP DEVELOPMENT',
+    organization: 'CSE Student Society',
+    period: 'Aug 2025 — Present',
+    description:
+      'Driving partnership development for the Computer Science & Engineering Student Society at the University of Moratuwa.',
+  },
+  {
+    number: '06',
+    title: 'oGT MARKET EXPANSION TEAM LEADER',
+    organization: 'AIESEC in Sri Lanka',
+    period: 'Jul 2024 — Mar 2025',
+    description:
+      'Led market expansion for outgoing global talent exchanges — facilitating B2B partnerships and coordinating international talent initiatives.',
   },
 ]
 

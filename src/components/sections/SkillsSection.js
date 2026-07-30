@@ -6,11 +6,11 @@ import SpotlightCard from '../SpotlightCard'
 const skillCategories = [
   {
     title: 'Frontend',
-    skills: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'JavaScript', 'GSAP', 'HTML / CSS'],
+    skills: ['React', 'Next.js', 'TypeScript', 'React Native', 'Expo', 'Tailwind CSS', 'JavaScript', 'GSAP', 'HTML / CSS'],
   },
   {
     title: 'Backend & Data',
-    skills: ['Node.js', 'Python', 'FastAPI', 'Express', 'MongoDB', 'PostgreSQL', 'GraphQL', 'REST APIs', 'WebSockets', 'Webhooks'],
+    skills: ['Node.js', 'Python', 'FastAPI', 'Express', 'PostgreSQL', 'MongoDB', 'Redis', 'Supabase', 'Celery', 'Socket.IO', 'REST APIs'],
   },
   {
     title: 'Cyber Security',
@@ -18,7 +18,7 @@ const skillCategories = [
   },
   {
     title: 'AI & Automation',
-    skills: ['Google ADK', 'Gemini API', 'FastMCP', 'AI Agents', 'n8n', 'Playwright', 'Scrapy', 'Puppeteer'],
+    skills: ['CrewAI', 'PyTorch', 'RAG', 'Gemini API', 'Hugging Face', 'MLflow', 'AI Agents', 'n8n', 'Playwright'],
   },
 ]
 
